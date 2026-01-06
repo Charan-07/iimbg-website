@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Placements — IIM Bodh Gaya</title>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.1/font/bootstrap-icons.min.css">
+
+    <style>
+        /* ===== ROOT VARIABLES - Colors & Theming ===== */
+        :root {
+            /* Base Palette */
+            --primary-navy: #1e3a8a;
+            --secondary-blue: #3b82f6;
+            --accent-blue: #0ea5e9;
+            --light-gray: #f8fafc;
+            --dark-text: #1e293b;
+            --white: #ffffff;
+
+            /* SEMANTIC THEME VARIABLES (Default Light) */
+            --bg-body: #ffffff;
+            --bg-nav: #ffffff;
+            --bg-section-alt: #f8fafc;
+            --bg-card: #ffffff;
+            --bg-process-step: #ffffff;
+            --bg-badge: #ffffff;
+            --bg-brochure: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+
+            --text-main: #1e293b;
+            --text-heading: #1e3a8a;
+            --text-nav: #1e3a8a;
+            --text-muted: #6c757d;
+
+            --border-color: #e2e8f0;
+            --shadow-subtle: rgba(0, 0, 0, 0.05);
+            --shadow-hover: rgba(0, 0, 0, 0.1);
+
+            --logo-bg: transparent;
+
+            /* Footer Background - Default Blue Gradient */
+            --bg-footer: linear-gradient(135deg, #1e3a8a 0%, #0f172a 100%);
+        }
+
+        /* DARK MODE OVERRIDES */
+        [data-theme="dark"] {
+            --bg-body: #121212;
+            --bg-nav: #1e1e1e;
+            --bg-section-alt: #1e1e1e;
+            /* Darker section */
+            --bg-card: #262626;
+            --bg-process-step: #262626;
+            --bg-badge: #262626;
+            --bg-brochure: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
+
+            --text-main: #e0e0e0;
+            --text-heading: #60a5fa;
+            /* Lighter Blue for visibility */
+            --text-nav: #e0e0e0;
+            --text-muted: #a0a0a0;
+
+            --border-color: rgba(255, 255, 255, 0.1);
+            --shadow-subtle: rgba(0, 0, 0, 0.5);
+            --shadow-hover: rgba(0, 0, 0, 0.7);
+
+            --logo-bg: rgba(255, 255, 255, 0.9);
+
+            /* Footer Background - Dark Mode Black Gradient */
+            --bg-footer: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+        }
+
+        /* ===== GLOBAL STYLES ===== */
+        body {
+            font-family: 'Open Sans', sans-serif;
+            color: var(--text-main);
+            background-color: var(--bg-body);
+            line-height: 1.6;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: 'Open Sans', sans-serif;
+            font-weight: 700;
+            color: var(--text-heading);
+            text-shadow: 0 6px 12px rgba(0, 0, 0, 0.25), 0 2px 4px rgba(0, 0, 0, 0.12);
+            transition: color 0.3s ease;
+        }
+
+        /* ===== NAVIGATION ===== */
+        .navbar {
+            background-color: var(--bg-nav);
+            padding: 0.5rem 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border-bottom: 3px solid var(--secondary-blue);
+            transition: background-color 0.3s ease;
+        }
+
+        .navbar-brand {
+            font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-heading) !important;
+        }
+
+        .site-logo {
+            max-height: 110px;
+            height: auto;
+            width: auto;
+            display: inline-block;
+            vertical-align: middle;
+            margin: -15px 0.5rem -15px 0;
+            background: var(--logo-bg);
+            border-radius: 8px;
+            padding: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .navbar-brand,
+        .navbar-brand img {
+            border: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+
+        .nav-link {
+            color: var(--text-nav) !important;
+            font-weight: 500;
+            margin: 0 0.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--secondary-blue) !important;
+        }
+
+        /* Dropdowns */
+        .dropdown-menu {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+        }
+
+        .dropdown-item {
+            color: var(--text-main);
+            transition: background-color 0.3s ease;
+        }
+
+        .dropdown-item:hover {
+            background-color: var(--bg-body);
+            color: var(--secondary-blue);
+        }
+
+        /* Dark Mode Toggle Button */
+        .theme-toggle-btn {
+            background: none;
+            border: none;
+            color: var(--text-nav);
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 8px;
+            margin-left: 10px;
+            transition: color 0.3s ease;
+        }
+
+        .theme-toggle-btn:hover {
+            color: var(--secondary-blue);
+        }
+
+        /* ===== HERO ===== */
+        .hero-section {
+            background: linear-gradient(135deg, var(--primary-navy) 0%, var(--secondary-blue) 100%);
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .hero-section h1 {
+            color: white !important;
+            margin-bottom: 1rem;
+        }
+
+        .hero-section p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.2rem;
+        }
+
+        .section-padding {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title h2 {
+            font-size: 2.25rem;
+            position: relative;
+            padding-bottom: 1rem;
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: var(--secondary-blue);
+        }
+
+        /* ===== CHAIRPERSON MESSAGE ===== */
+        .chairperson-card {
+            background: var(--bg-card);
+            border-left: 5px solid var(--secondary-blue);
+            box-shadow: 0 5px 20px var(--shadow-subtle);
+            padding: 30px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .quote-icon {
+            font-size: 2rem;
+            color: var(--accent-blue);
+            margin-bottom: 10px;
+        }
+
+        /* ===== PROCESS TIMELINE ===== */
+        .process-step {
+            position: relative;
+            padding: 20px;
+            background: var(--bg-process-step);
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            text-align: center;
+            transition: transform 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+            height: 100%;
+        }
+
+        .process-step:hover {
+            transform: translateY(-5px);
+            border-color: var(--secondary-blue);
+        }
+
+        .step-number {
+            width: 40px;
+            height: 40px;
+            background: var(--primary-navy);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            margin: 0 auto 15px;
+        }
+
+        /* General List Group for Mobile Steps */
+        .list-group-item {
+            background-color: var(--bg-card);
+            color: var(--text-main);
+            border-color: var(--border-color);
+        }
+
+        /* ===== RECRUITER GRID ===== */
+        .company-badge {
+            display: inline-block;
+            background: var(--bg-badge);
+            border: 1px solid var(--border-color);
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 30px;
+            font-weight: 600;
+            color: var(--text-main);
+            transition: all 0.2s;
+        }
+
+        .company-badge:hover {
+            background: var(--primary-navy);
+            color: white;
+            transform: scale(1.05);
+            border-color: var(--primary-navy);
+        }
+
+        /* ===== BROCHURE CARDS ===== */
+        .brochure-card {
+            background: var(--bg-brochure);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            transition: transform 0.3s, background 0.3s ease;
+            border: 1px solid var(--border-color);
+        }
+
+        .brochure-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px var(--shadow-hover);
+        }
+
+        .pdf-icon {
+            font-size: 3rem;
+            color: #dc2626;
+            margin-bottom: 1rem;
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            background: var(--bg-footer);
+            color: white;
+            padding: 50px 0 20px;
+            transition: background 0.3s ease;
+        }
+
+        .footer h5 {
+            color: var(--accent-blue);
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+        }
+
+        .footer a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer a:hover {
+            color: var(--accent-blue);
+        }
+
+        .footer ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .social-icons a {
+            color: white;
+            font-size: 1.5rem;
+            margin-right: 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            color: var(--accent-blue);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 3rem;
+            padding-top: 2rem;
+        }
+
+        /* Helper Classes */
+        .text-muted {
+            color: var(--text-muted) !important;
+        }
+
+        .bg-light-alt {
+            background-color: var(--bg-section-alt) !important;
+            transition: background-color 0.3s ease;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top">
+        <div class="container-fluid px-5">
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+                <img src="assets/logos/IIMBG TRANSPARENT.png" alt="IIM Bodh Gaya" class="site-logo me-2">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="faculty.html">Faculty</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button"
+                            data-bs-toggle="dropdown">Programs</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#programs">All Programs</a></li>
+                            <li><a class="dropdown-item" href="mba.html">MBA/PGPM</a></li>
+                            <li><a class="dropdown-item" href="dbm.html">MBA-DBM</a></li>
+                            <li><a class="dropdown-item" href="hhm.html">MBA-HHM</a></li>
+                            <li><a class="dropdown-item" href="ipm.html">IPM</a></li>
+                            <li><a class="dropdown-item" href="emba.html">Executive MBA</a></li>
+                            <li><a class="dropdown-item" href="phd.html">PhD</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item"><a class="nav-link active" href="placements.html">Placements</a></li>
+                    <li class="nav-item"><a class="nav-link" href="campuslife.html">Campus Life</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+
+                    <li class="nav-item ms-2">
+                        <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle Dark Mode">
+                            <i class="bi bi-moon-fill"></i>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <section class="hero-section">
+            <div class="container">
+                <h1 class="mb-3">Placements & Corporate Relations</h1>
+                <p>Building enduring relationships with the corporate world</p>
+            </div>
+        </section>
+
+        <section class="section-padding">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-4 mb-4 mb-lg-0 text-center">
+                        <div class="bg-light p-3 rounded-circle d-inline-block shadow-sm"
+                            style="width: 250px; height: 250px; overflow: hidden;">
+                            <i class="bi bi-person-fill"
+                                style="font-size: 10rem; color: #cbd5e1; line-height: 250px;"></i>
+                        </div>
+                        <h4 class="mt-3 mb-1">Dr. Deepika R. Gupta</h4>
+                        <p class="text-muted">Chairperson – Placement</p>
+                    </div>
+                    <div class="col-lg-8">
+                        <div class="chairperson-card">
+                            <i class="bi bi-quote quote-icon"></i>
+                            <h3 class="mb-3">Message from the Chairperson</h3>
+                            <p>At IIM Bodh Gaya, we have been able to attract talent across the length and breadth of
+                                the nation. We ensure that our students are well accustomed to the ever-evolving
+                                dynamics of professional corporate culture. Our goal is to use education as a medium to
+                                change the world, to have a positive impact on society, and to attain sustainable
+                                progress.</p>
+                            <p>We are a young and growing family; within a small span of time, we have shown our
+                                commitment to the corporate world and have created an enduring relationship with
+                                emerging India. I use this medium to thank our recruitment partners for their valuable
+                                support and guidance throughout this journey.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-padding bg-light-alt">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Placement Brochures</h2>
+                    <p class="text-muted">Download our official placement reports and brochures</p>
+                </div>
+                <div class="row justify-content-center g-4">
+                    <div class="col-md-5">
+                        <div class="brochure-card">
+                            <i class="bi bi-file-earmark-bar-graph-fill pdf-icon"
+                                style="color: var(--primary-navy);"></i>
+                            <h4>Final Placement Brochure</h4>
+                            <p class="text-muted mb-4">MBA, DBM & HHM (Batch 2024-2026)</p>
+                            <a href="https://iimbg.ac.in/wp-content/uploads/2025/11/Final-Brochure-MBADBMHHM-2024-2026.pdf"
+                                target="_blank" class="btn btn-outline-primary w-100 rounded-pill">
+                                <i class="bi me-2"></i> View
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="brochure-card">
+                            <i class="bi bi-file-earmark-bar-graph-fill pdf-icon"
+                                style="color: var(--primary-navy);"></i>
+                            <h4>SIP Brochure</h4>
+                            <p class="text-muted mb-4">Summer Internship (Batch 2025-2027)</p>
+                            <a href="https://iimbg.ac.in/wp-content/uploads/2025/11/SIP-2025-2027-Merged-Brochure.pdf"
+                                target="_blank" class="btn btn-outline-primary w-100 rounded-pill">
+                                <i class="bi me-2"></i> View
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-padding">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Placement Process</h2>
+                </div>
+                <div class="row g-3 d-none d-lg-flex">
+                    <div class="col">
+                        <div class="process-step">
+                            <div class="step-number">1</div>
+                            <h5>Registration</h5>
+                            <p class="small text-muted">Students register interest (EOI) for job profiles shared by the
+                                placement cell.</p>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="process-step">
+                            <div class="step-number">2</div>
+                            <h5>Pre-Placement Talk</h5>
+                            <p class="small text-muted">Recruiters conduct PPTs to explain organization philosophy and
+                                expectations.</p>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="process-step">
+                            <div class="step-number">3</div>
+                            <h5>Shortlisting</h5>
+                            <p class="small text-muted">Companies review CVs and shortlist suitable candidates for
+                                interviews.</p>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="process-step">
+                            <div class="step-number">4</div>
+                            <h5>Interviews</h5>
+                            <p class="small text-muted">On-campus or off-campus interview rounds are conducted.</p>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="process-step">
+                            <div class="step-number">5</div>
+                            <h5>Final Offer</h5>
+                            <p class="small text-muted">Successful candidates receive offers. Withdrawals are not
+                                permitted post-selection.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="d-lg-none">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><strong>1. Registration:</strong> Submission of EOI.</li>
+                        <li class="list-group-item"><strong>2. PPT:</strong> Pre-Placement Talks.</li>
+                        <li class="list-group-item"><strong>3. Shortlisting:</strong> CV Review by Recruiters.</li>
+                        <li class="list-group-item"><strong>4. Interviews:</strong> Selection Rounds.</li>
+                        <li class="list-group-item"><strong>5. Offers:</strong> Final selection.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-padding bg-light-alt">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Prominent Recruiters</h2>
+                    <p>Our valued partners in progress</p>
+                </div>
+
+                <div class="text-center">
+                    <span class="company-badge">ICICI Bank</span>
+                    <span class="company-badge">HDFC Bank</span>
+                    <span class="company-badge">Axis Bank</span>
+                    <span class="company-badge">HSBC</span>
+                    <span class="company-badge">BNY Mellon</span>
+                    <span class="company-badge">Morgan Stanley</span>
+                    <span class="company-badge">McKinsey & Co</span>
+                    <span class="company-badge">Deloitte</span>
+                    <span class="company-badge">PwC</span>
+                    <span class="company-badge">KPMG</span>
+                    <span class="company-badge">EY</span>
+                    <span class="company-badge">Accenture</span>
+                    <span class="company-badge">Cognizant</span>
+                    <span class="company-badge">Infosys</span>
+                    <span class="company-badge">Wipro</span>
+                    <span class="company-badge">HCLTech</span>
+                    <span class="company-badge">Tech Mahindra</span>
+                    <span class="company-badge">Tata Steel</span>
+                    <span class="company-badge">L&T</span>
+                    <span class="company-badge">Aditya Birla Group</span>
+                    <span class="company-badge">Reliance Industries</span>
+                    <span class="company-badge">Adani Group</span>
+                    <span class="company-badge">Amazon</span>
+                    <span class="company-badge">Flipkart</span>
+                    <span class="company-badge">MakeMyTrip</span>
+                    <span class="company-badge">Tiger Analytics</span>
+                    <span class="company-badge">Crisil</span>
+                    <span class="company-badge">Kotak Mahindra</span>
+                    <span class="company-badge">Bajaj Finserv</span>
+                    <span class="company-badge">SBI Life</span>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <h5>About IIM Bodh Gaya</h5>
+                    <p>Indian Institute of Management Bodh Gaya is committed to creating socially responsible managers
+                        and emotionally mature, mindful leaders who can make meaningful contributions to society.</p>
+                    <div class="social-icons mt-4">
+                        <a href="https://www.facebook.com/iimbodhgaya" target="_blank" rel="noopener"
+                            aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+                        <a href="https://x.com/iimbodhgaya" target="_blank" rel="noopener" aria-label="X"><i
+                                class="bi bi-twitter-x"></i></a>
+                        <a href="https://www.linkedin.com/school/iimbg/posts/?feedView=all" target="_blank"
+                            rel="noopener" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+                        <a href="https://www.instagram.com/iimbodhgaya/" target="_blank" rel="noopener"
+                            aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+                        <a href="https://www.youtube.com/@MediaPRCellIIMBodhGaya" target="_blank" rel="noopener"
+                            aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+                    </div>
+                </div>
+
+                <div class="col-lg-2 col-md-6">
+                    <h5>Quick Links</h5>
+                    <ul>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#programs">Programs</a></li>
+                        <li><a href="#placements">Placements</a></li>
+                        <li><a href="#campus">Campus Life</a></li>
+                        <li><a href="#contact">Contact Us</a></li>
+                        <li><a href="#">Careers</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <h5>Academic Programs</h5>
+                    <ul>
+                        <li><a href="#programs">MBA / PGPM</a></li>
+                        <li><a href="#programs">Integrated Programme (IPM)</a></li>
+                        <li><a href="#programs">MBA - Healthcare Management</a></li>
+                        <li><a href="#programs">Executive MBA (Online)</a></li>
+                        <li><a href="#programs">Ph.D. Program</a></li>
+                        <li><a href="#">Faculty Development</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <h5>Important Links</h5>
+                    <ul>
+                        <li><a href="#">Board of Governors</a></li>
+                        <li><a href="#">Faculty Directory</a></li>
+                        <li><a href="#">Right to Information</a></li>
+                        <li><a href="#">Tenders & Notices</a></li>
+                        <li><a href="#">Anti-Ragging Policy</a></li>
+                        <li><a href="#">Student Clubs</a></li>
+                        <li><a href="#">Alumni Network</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="row">
+                    <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                        <p class="mb-0">&copy; 2025 IIM Bodh Gaya. All rights reserved.</p>
+                    </div>
+                    <div class="col-md-6 text-center text-md-end">
+                        <p class="mb-0">
+                            <a href="#" style="margin-right: 15px;">Privacy Policy</a>
+                            <a href="#" style="margin-right: 15px;">Terms of Use</a>
+                            <a href="#">Sitemap</a>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="row mt-4">
+                    <div class="col-12 text-center" style="font-size: 0.9rem; opacity: 0.8;">
+                        <p class="mb-1"><strong>Director:</strong> Dr. Vinita S. Sahay</p>
+                        <p class="mb-0"><strong>Mentor Institution:</strong> IIM Calcutta</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const toggleBtn = document.getElementById('theme-toggle');
+            const icon = toggleBtn.querySelector('i');
+            const html = document.documentElement;
+
+            // Check for saved user preference
+            const savedTheme = localStorage.getItem('theme');
+
+            if (savedTheme === 'dark') {
+                html.setAttribute('data-theme', 'dark');
+                icon.classList.remove('bi-moon-fill');
+                icon.classList.add('bi-sun-fill');
+            }
+
+            // Handle Click Event
+            toggleBtn.addEventListener('click', () => {
+                const currentTheme = html.getAttribute('data-theme');
+
+                if (currentTheme === 'dark') {
+                    // Switch to Light
+                    html.removeAttribute('data-theme');
+                    localStorage.setItem('theme', 'light');
+                    icon.classList.remove('bi-sun-fill');
+                    icon.classList.add('bi-moon-fill');
+                } else {
+                    // Switch to Dark
+                    html.setAttribute('data-theme', 'dark');
+                    localStorage.setItem('theme', 'dark');
+                    icon.classList.remove('bi-moon-fill');
+                    icon.classList.add('bi-sun-fill');
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

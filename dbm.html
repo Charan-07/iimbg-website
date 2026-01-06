@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MBA - Digital Business Management — IIM Bodh Gaya</title>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.1/font/bootstrap-icons.min.css">
+
+    <style>
+        /* ===== ROOT VARIABLES - Colors & Theming ===== */
+        :root {
+            /* Base Palette */
+            --primary-navy: #1e3a8a;
+            --secondary-blue: #3b82f6;
+            --accent-cyan: #06b6d4;
+            --accent-blue: #0ea5e9;
+            --dark-bg-hero: #0f172a;
+
+            /* SEMANTIC THEME VARIABLES (Default Light) */
+            --bg-body: #ffffff;
+            --bg-nav: #ffffff;
+            --bg-section-alt: #f8fafc;
+            /* Light gray for curriculum section */
+            --bg-card: #ffffff;
+            --bg-bento: #f8fafc;
+            --bg-sidebar-hover: #f1f5f9;
+            --bg-sidebar-active: rgba(59, 130, 246, 0.1);
+
+            --text-main: #1e293b;
+            --text-heading: #1e3a8a;
+            --text-nav: #1e3a8a;
+            --text-muted: #64748b;
+            --text-sidebar: #1e293b;
+
+            --border-color: #e2e8f0;
+            --shadow-subtle: rgba(0, 0, 0, 0.05);
+            --shadow-hover: rgba(59, 130, 246, 0.1);
+
+            --logo-bg: transparent;
+
+            /* Footer Background - Default Blue Gradient */
+            --bg-footer: linear-gradient(135deg, #1e3a8a 0%, #0f172a 100%);
+        }
+
+        /* DARK MODE OVERRIDES */
+        [data-theme="dark"] {
+            --bg-body: #121212;
+            --bg-nav: #1e1e1e;
+            --bg-section-alt: #1e1e1e;
+            /* Darker section */
+            --bg-card: #262626;
+            --bg-bento: #262626;
+            --bg-sidebar-hover: #333333;
+            --bg-sidebar-active: rgba(59, 130, 246, 0.2);
+
+            --text-main: #e0e0e0;
+            --text-heading: #60a5fa;
+            /* Lighter Blue for visibility */
+            --text-nav: #e0e0e0;
+            --text-muted: #94a3b8;
+            --text-sidebar: #e0e0e0;
+
+            --border-color: rgba(255, 255, 255, 0.1);
+            --shadow-subtle: rgba(0, 0, 0, 0.5);
+            --shadow-hover: rgba(0, 0, 0, 0.7);
+
+            --logo-bg: rgba(255, 255, 255, 0.9);
+
+            /* Footer Background - Dark Mode Black Gradient */
+            --bg-footer: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+        }
+
+        /* ===== GLOBAL STYLES ===== */
+        body {
+            font-family: 'Open Sans', sans-serif;
+            color: var(--text-main);
+            background-color: var(--bg-body);
+            line-height: 1.6;
+            overflow-x: hidden;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: 'Open Sans', sans-serif;
+            font-weight: 700;
+            color: var(--text-heading);
+            transition: color 0.3s ease;
+        }
+
+        /* Monospace font for "Tech" elements */
+        .font-mono {
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* ===== NAVIGATION ===== */
+        .navbar {
+            background-color: var(--bg-nav);
+            padding: 0.5rem 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border-bottom: 3px solid var(--secondary-blue);
+            transition: background-color 0.3s ease;
+        }
+
+        .site-logo {
+            max-height: 110px;
+            height: auto;
+            width: auto;
+            display: inline-block;
+            vertical-align: middle;
+            margin: -15px 0.5rem -15px 0;
+            background: var(--logo-bg);
+            border-radius: 8px;
+            padding: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .navbar-brand,
+        .navbar-brand img {
+            border: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+
+        .nav-link {
+            color: var(--text-nav) !important;
+            font-weight: 500;
+            margin: 0 0.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--secondary-blue) !important;
+        }
+
+        /* Dropdowns */
+        .dropdown-menu {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+        }
+
+        .dropdown-item {
+            color: var(--text-main);
+            transition: background-color 0.3s ease;
+        }
+
+        .dropdown-item:hover {
+            background-color: var(--bg-body);
+            color: var(--secondary-blue);
+        }
+
+        /* Dark Mode Toggle Button */
+        .theme-toggle-btn {
+            background: none;
+            border: none;
+            color: var(--text-nav);
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 8px;
+            margin-left: 10px;
+            transition: color 0.3s ease;
+        }
+
+        .theme-toggle-btn:hover {
+            color: var(--secondary-blue);
+        }
+
+        /* ===== DIGITAL HERO SECTION (Keep Dark Theme) ===== */
+        .hero-digital {
+            background: radial-gradient(circle at top right, #1e40af, #0f172a);
+            min-height: 85vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            color: white;
+            padding: 80px 0;
+        }
+
+        /* Abstract "Data Grid" Background */
+        .hero-grid-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: 1;
+        }
+
+        .display-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            background: -webkit-linear-gradient(0deg, #fff, #67e8f9);
+            /* Cyan gradient text */
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+
+        /* "Code Window" Stats Card */
+        .terminal-card {
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+            font-family: 'JetBrains Mono', monospace;
+            overflow: hidden;
+        }
+
+        .terminal-header {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 10px 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            gap: 8px;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .dot-red {
+            background: #ef4444;
+        }
+
+        .dot-yellow {
+            background: #f59e0b;
+        }
+
+        .dot-green {
+            background: #10b981;
+        }
+
+        .terminal-body {
+            padding: 25px;
+            color: #94a3b8;
+        }
+
+        .code-line {
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .code-val {
+            color: var(--accent-cyan);
+            font-weight: bold;
+        }
+
+        .code-key {
+            color: #c084fc;
+        }
+
+        /* ===== BENTO GRID LAYOUT ===== */
+        .bento-box {
+            background: var(--bg-bento);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 30px;
+            height: 100%;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .bento-box:hover {
+            transform: translateY(-5px);
+            border-color: var(--secondary-blue);
+            box-shadow: 0 10px 30px var(--shadow-hover);
+        }
+
+        .bento-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--bg-card);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--text-heading);
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .bento-large {
+            background: var(--primary-navy);
+            color: white;
+        }
+
+        .bento-large .bento-icon {
+            color: var(--secondary-blue);
+            background: white;
+            /* Icon bg always white in this specific navy card */
+        }
+
+        .bento-large h3,
+        .bento-large p {
+            color: white;
+        }
+
+        /* ===== TECH SIDEBAR ===== */
+        .tech-sidebar .nav-link {
+            color: var(--text-sidebar);
+            padding: 15px 20px;
+            margin-bottom: 8px;
+            border-left: 3px solid transparent;
+            transition: all 0.2s;
+            font-weight: 600;
+            border-radius: 0 5px 5px 0;
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        .tech-sidebar .nav-link:hover {
+            background: var(--bg-sidebar-hover);
+            color: var(--secondary-blue);
+        }
+
+        .tech-sidebar .nav-link.active {
+            background: var(--bg-sidebar-active);
+            color: var(--text-heading);
+            border-left-color: var(--secondary-blue);
+        }
+
+        .track-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 25px;
+            position: relative;
+            overflow: hidden;
+            transition: background-color 0.3s ease;
+        }
+
+        .track-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--secondary-blue);
+        }
+
+        /* ===== ADVISORY NODES (Keep Dark Theme) ===== */
+        .advisory-section {
+            background: #0f172a;
+            position: relative;
+            padding: 100px 0;
+            overflow: hidden;
+        }
+
+        .node-card {
+            background: rgba(30, 41, 59, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .node-card:hover {
+            background: rgba(30, 41, 59, 1);
+            border-color: var(--accent-cyan);
+            transform: scale(1.05);
+        }
+
+        .node-name {
+            color: white;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .node-role {
+            color: #94a3b8;
+            font-size: 0.85rem;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            background: var(--bg-footer);
+            color: white;
+            padding: 50px 0 20px;
+            transition: background 0.3s ease;
+        }
+
+        .footer h5 {
+            color: var(--accent-blue);
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+        }
+
+        .footer a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer a:hover {
+            color: var(--accent-blue);
+        }
+
+        .footer ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .social-icons a {
+            color: white;
+            font-size: 1.5rem;
+            margin-right: 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            color: var(--accent-blue);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 3rem;
+            padding-top: 2rem;
+        }
+
+        /* Helper Classes */
+        .bg-light-alt {
+            background-color: var(--bg-section-alt) !important;
+            transition: background-color 0.3s ease;
+        }
+
+        .text-muted-alt {
+            color: var(--text-muted) !important;
+        }
+
+        /* Ensure specific text elements adapt */
+        .text-primary-navy {
+            color: var(--text-heading) !important;
+        }
+    </style>
+</head>
+
+<body data-bs-spy="scroll" data-bs-target="#tech-nav" data-bs-offset="100">
+
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top">
+        <div class="container-fluid px-5">
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+                <img src="assets/logos/IIMBG TRANSPARENT.png" alt="IIM Bodh Gaya" class="site-logo me-2">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="faculty.html">Faculty</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle active" href="#" role="button"
+                            data-bs-toggle="dropdown">Programs</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#programs">All Programs</a></li>
+                            <li><a class="dropdown-item" href="mba.html">MBA/PGPM</a></li>
+                            <li><a class="dropdown-item" href="dbm.html">MBA-DBM</a></li>
+                            <li><a class="dropdown-item" href="hhm.html">MBA-HHM</a></li>
+                            <li><a class="dropdown-item" href="ipm.html">IPM</a></li>
+                            <li><a class="dropdown-item" href="emba.html">Executive MBA</a></li>
+                            <li><a class="dropdown-item" href="phd.html">PhD</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="placements.html">Placements</a></li>
+                    <li class="nav-item"><a class="nav-link" href="campuslife.html">Campus Life</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+
+                    <li class="nav-item ms-2">
+                        <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle Dark Mode">
+                            <i class="bi bi-moon-fill"></i>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <section class="hero-digital">
+            <div class="hero-grid-bg"></div>
+            <div class="container position-relative z-2">
+                <div class="row align-items-center">
+                    <div class="col-lg-6 mb-5 mb-lg-0">
+                        <span class="font-mono text-info mb-2 d-block">&lt;Program_Type = "MBA" /&gt;</span>
+                        <h1 class="display-title">Digital Business Management</h1>
+                        <p class="lead text-light opacity-75 mb-4">Architecting the future of business with Data, AI,
+                            and Strategy.</p>
+                        <div class="d-flex gap-3">
+                            <a href="#curriculum" class="btn btn-info fw-bold px-4 rounded-pill">View Curriculum</a>
+                            <a href="#" class="btn btn-outline-light px-4 rounded-pill">Download Brochure</a>
+                        </div>
+                    </div>
+                    <div class="col-lg-5 offset-lg-1">
+                        <div class="terminal-card">
+                            <div class="terminal-header">
+                                <div class="dot dot-red"></div>
+                                <div class="dot dot-yellow"></div>
+                                <div class="dot dot-green"></div>
+                                <span class="ms-2 text-muted small font-mono">stats.json</span>
+                            </div>
+                            <div class="terminal-body">
+                                <span class="code-line"><span class="code-key">"market_growth"</span>: <span
+                                        class="code-val">"$3.4 Trillion"</span>,</span>
+                                <span class="code-line"><span class="code-key">"target_year"</span>: <span
+                                        class="code-val">2026</span>,</span>
+                                <span class="code-line"><span class="code-key">"focus_areas"</span>: [</span>
+                                <span class="code-line ms-3 text-white">"FinTech",</span>
+                                <span class="code-line ms-3 text-white">"AI & Analytics",</span>
+                                <span class="code-line ms-3 text-white">"Digital Strategy"</span>
+                                <span class="code-line">],</span>
+                                <span class="code-line"><span class="code-key">"status"</span>: <span
+                                        class="code-val">"High_Demand"</span></span>
+                                <span class="code-line mt-2 text-success font-mono">>_ System ready...</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-5">
+            <div class="container py-5">
+                <div class="row mb-5">
+                    <div class="col-lg-6">
+                        <h2 class="display-6 fw-bold">Why DBM?</h2>
+                        <p class="text-muted-alt">Digitalization is the new normal. We prepare you to lead the
+                            transformation.</p>
+                    </div>
+                </div>
+
+                <div class="row g-4">
+                    <div class="col-lg-6">
+                        <div class="bento-box bento-large">
+                            <div class="bento-icon"><i class="bi bi-cpu"></i></div>
+                            <h3>Industry Co-Designed</h3>
+                            <p class="opacity-75">Curriculum vetted by experts from Microsoft, IBM, Infosys, and
+                                BigBasket to ensure you are ready for Day 1.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="bento-box">
+                            <div class="bento-icon"><i class="bi bi-globe"></i></div>
+                            <h5>Global Immersion</h5>
+                            <p class="small text-muted-alt">Optional 21-day immersive learning module at a foreign
+                                institute.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="bento-box">
+                            <div class="bento-icon"><i class="bi bi-laptop"></i></div>
+                            <h5>Live Projects</h5>
+                            <p class="small text-muted-alt">4-Month intensive industry internship working on real
+                                digital
+                                problems.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="curriculum" class="py-5 bg-light-alt">
+            <div class="container py-5">
+                <div class="row">
+                    <div class="col-lg-3">
+                        <div class="tech-sidebar sticky-top" style="top: 100px; z-index: 10;">
+                            <h5 class="mb-4 ps-3 font-mono fw-bold text-uppercase text-muted-alt">Curriculum Modules
+                            </h5>
+                            <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist"
+                                aria-orientation="vertical">
+                                <button class="nav-link active" id="v-pills-core-tab" data-bs-toggle="pill"
+                                    data-bs-target="#v-pills-core" type="button" role="tab" aria-controls="v-pills-core"
+                                    aria-selected="true">Core Courses</button>
+                                <button class="nav-link" id="v-pills-mkt-tab" data-bs-toggle="pill"
+                                    data-bs-target="#v-pills-mkt" type="button" role="tab" aria-controls="v-pills-mkt"
+                                    aria-selected="false">Digital Marketing</button>
+                                <button class="nav-link" id="v-pills-data-tab" data-bs-toggle="pill"
+                                    data-bs-target="#v-pills-data" type="button" role="tab" aria-controls="v-pills-data"
+                                    aria-selected="false">Data Analytics</button>
+                                <button class="nav-link" id="v-pills-strat-tab" data-bs-toggle="pill"
+                                    data-bs-target="#v-pills-strat" type="button" role="tab"
+                                    aria-controls="v-pills-strat" aria-selected="false">Strategy & Consulting</button>
+                                <button class="nav-link" id="v-pills-fin-tab" data-bs-toggle="pill"
+                                    data-bs-target="#v-pills-fin" type="button" role="tab" aria-controls="v-pills-fin"
+                                    aria-selected="false">FinTech</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-9">
+                        <div class="tab-content h-100" id="v-pills-tabContent">
+
+                            <div class="tab-pane fade show active h-100" id="v-pills-core" role="tabpanel"
+                                aria-labelledby="v-pills-core-tab">
+                                <div class="ps-lg-4 pt-3 h-100">
+                                    <h3 class="mb-4">Year 1: The Digital Core</h3>
+                                    <div class="row g-4 h-100">
+                                        <div class="col-md-6 d-flex">
+                                            <div class="track-card h-100 w-100">
+                                                <h5>Term I & II</h5>
+                                                <ul class="list-unstyled mt-3 small text-muted-alt">
+                                                    <li class="mb-2">Digital Business Economics</li>
+                                                    <li class="mb-2">Introduction to R and Python</li>
+                                                    <li class="mb-2">Industry 4.0 Strategic Initiatives</li>
+                                                    <li class="mb-2">Digital Transformation & Leadership</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 d-flex">
+                                            <div class="track-card h-100 w-100">
+                                                <h5>Term III</h5>
+                                                <ul class="list-unstyled mt-3 small text-muted-alt">
+                                                    <li class="mb-2">Analytics in Modern Business</li>
+                                                    <li class="mb-2">Digital Sustainability & ESG</li>
+                                                    <li class="mb-2">Data Governance & Policies</li>
+                                                    <li class="mb-2">Design Thinking</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="tab-pane fade h-100" id="v-pills-mkt" role="tabpanel"
+                                aria-labelledby="v-pills-mkt-tab">
+                                <div class="ps-lg-4 pt-3 h-100">
+                                    <div class="track-card h-100 p-5 d-flex flex-column justify-content-center">
+                                        <span
+                                            class="badge bg-warning text-dark mb-2 align-self-start">Specialization</span>
+                                        <h3 class="text-primary-navy">Digital Marketing & Business Dev</h3>
+                                        <p class="text-muted-alt">Mastering the art of reaching customers in a
+                                            digital-first
+                                            world.</p>
+                                        <hr>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <ul class="list-unstyled small fw-bold text-secondary">
+                                                    <li>SEO & SEM</li>
+                                                    <li>Social Media Marketing</li>
+                                                    <li>Content Strategy</li>
+                                                </ul>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <ul class="list-unstyled small fw-bold text-secondary">
+                                                    <li>Digital Product Mgmt</li>
+                                                    <li>B2B Digital Marketing</li>
+                                                    <li>Sales & Biz Dev</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="tab-pane fade h-100" id="v-pills-data" role="tabpanel"
+                                aria-labelledby="v-pills-data-tab">
+                                <div class="ps-lg-4 pt-3 h-100">
+                                    <div class="track-card h-100 p-5 d-flex flex-column justify-content-center">
+                                        <span
+                                            class="badge bg-info text-dark mb-2 align-self-start">Specialization</span>
+                                        <h3 class="text-primary-navy">Data Analytics & Decision Sciences</h3>
+                                        <p class="text-muted-alt">Turning raw data into actionable business
+                                            intelligence.
+                                        </p>
+                                        <hr>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <ul class="list-unstyled small fw-bold text-secondary">
+                                                    <li>AI & Machine Learning</li>
+                                                    <li>Robotic Process Automation</li>
+                                                    <li>Cloud Computing & IoT</li>
+                                                </ul>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <ul class="list-unstyled small fw-bold text-secondary">
+                                                    <li>Big Data Analytics</li>
+                                                    <li>Cybersecurity</li>
+                                                    <li>Supply Chain Analytics</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="tab-pane fade h-100" id="v-pills-strat" role="tabpanel"
+                                aria-labelledby="v-pills-strat-tab">
+                                <div class="ps-lg-4 pt-3 h-100">
+                                    <div class="track-card h-100 p-5 d-flex flex-column justify-content-center">
+                                        <span
+                                            class="badge bg-danger text-white mb-2 align-self-start">Specialization</span>
+                                        <h3 class="text-primary-navy">Strategy & Consulting</h3>
+                                        <p class="text-muted-alt">Leading organizations through complex digital
+                                            transitions.
+                                        </p>
+                                        <hr>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <ul class="list-unstyled small fw-bold text-secondary">
+                                                    <li>Venture Growth Strategy</li>
+                                                    <li>Digital Biz Consulting</li>
+                                                </ul>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <ul class="list-unstyled small fw-bold text-secondary">
+                                                    <li>Exit Strategies</li>
+                                                    <li>Scaling in Digital Age</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="tab-pane fade h-100" id="v-pills-fin" role="tabpanel"
+                                aria-labelledby="v-pills-fin-tab">
+                                <div class="ps-lg-4 pt-3 h-100">
+                                    <div class="track-card h-100 p-5 d-flex flex-column justify-content-center">
+                                        <span
+                                            class="badge bg-success text-white mb-2 align-self-start">Specialization</span>
+                                        <h3 class="text-primary-navy">FinTech</h3>
+                                        <p class="text-muted-alt">The intersection of Finance and Technology.</p>
+                                        <hr>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <ul class="list-unstyled small fw-bold text-secondary">
+                                                    <li>Financial Engineering</li>
+                                                    <li>Digital Payments</li>
+                                                    <li>InsurTech</li>
+                                                </ul>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <ul class="list-unstyled small fw-bold text-secondary">
+                                                    <li>Python for Finance</li>
+                                                    <li>Cryptocurrency & Blockchain</li>
+                                                    <li>Derivatives</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="advisory-section">
+            <div class="container position-relative z-2">
+                <div class="text-center mb-5">
+                    <h2 class="text-white display-6">Advisory Network</h2>
+                    <p class="text-white-50 font-mono">Connected with Industry Leaders</p>
+                </div>
+
+                <div class="row g-4 justify-content-center">
+                    <div class="col-md-4 col-lg-3">
+                        <div class="node-card">
+                            <div class="node-name">Rajiv Kumar</div>
+                            <div class="node-role">MD, Microsoft IDC</div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-lg-3">
+                        <div class="node-card">
+                            <div class="node-name">Rakshit Daga</div>
+                            <div class="node-role">CTPO, BigBasket</div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-lg-3">
+                        <div class="node-card">
+                            <div class="node-name">Sandipan Sarkar</div>
+                            <div class="node-role">Distinguished Engineer, IBM</div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-lg-3">
+                        <div class="node-card">
+                            <div class="node-name">Ashish Khushu</div>
+                            <div class="node-role">CTO, L&T Tech Services</div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-lg-3">
+                        <div class="node-card">
+                            <div class="node-name">Sameer Ahmed</div>
+                            <div class="node-role">SAP Head, Infosys</div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-lg-3">
+                        <div class="node-card">
+                            <div class="node-name">Ritesh Arora</div>
+                            <div class="node-role">VP, Coforge</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-5 border-top" style="background-color: var(--bg-body);">
+            <div class="container text-center py-4">
+                <h3 class="mb-4 text-primary-navy">Join the Digital Revolution</h3>
+                <div class="d-flex justify-content-center gap-3 mb-4">
+                    <button class="btn btn-outline-primary rounded-pill px-4">Fee Structure (2025-27)</button>
+                    <button class="btn btn-primary rounded-pill px-4">Contact Admissions</button>
+                </div>
+                <p class="font-mono small text-muted-alt">queries_dbm@iimbg.ac.in | +91 9667350234</p>
+            </div>
+        </section>
+    </main>
+    <footer class="footer">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <h5>About IIM Bodh Gaya</h5>
+                    <p>Indian Institute of Management Bodh Gaya is committed to creating socially responsible managers
+                        and emotionally mature, mindful leaders who can make meaningful contributions to society.</p>
+                    <div class="social-icons mt-4">
+                        <a href="https://www.facebook.com/iimbodhgaya" target="_blank" rel="noopener"
+                            aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+                        <a href="https://x.com/iimbodhgaya" target="_blank" rel="noopener" aria-label="X"><i
+                                class="bi bi-twitter-x"></i></a>
+                        <a href="https://www.linkedin.com/school/iimbg/posts/?feedView=all" target="_blank"
+                            rel="noopener" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+                        <a href="https://www.instagram.com/iimbodhgaya/" target="_blank" rel="noopener"
+                            aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+                        <a href="https://www.youtube.com/@MediaPRCellIIMBodhGaya" target="_blank" rel="noopener"
+                            aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+                    </div>
+                </div>
+
+                <div class="col-lg-2 col-md-6">
+                    <h5>Quick Links</h5>
+                    <ul>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#programs">Programs</a></li>
+                        <li><a href="#placements">Placements</a></li>
+                        <li><a href="#campus">Campus Life</a></li>
+                        <li><a href="#contact">Contact Us</a></li>
+                        <li><a href="#">Careers</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <h5>Academic Programs</h5>
+                    <ul>
+                        <li><a href="#programs">MBA / PGPM</a></li>
+                        <li><a href="#programs">Integrated Programme (IPM)</a></li>
+                        <li><a href="#programs">MBA - Healthcare Management</a></li>
+                        <li><a href="#programs">Executive MBA (Online)</a></li>
+                        <li><a href="#programs">Ph.D. Program</a></li>
+                        <li><a href="#">Faculty Development</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <h5>Important Links</h5>
+                    <ul>
+                        <li><a href="#">Board of Governors</a></li>
+                        <li><a href="#">Faculty Directory</a></li>
+                        <li><a href="#">Right to Information</a></li>
+                        <li><a href="#">Tenders & Notices</a></li>
+                        <li><a href="#">Anti-Ragging Policy</a></li>
+                        <li><a href="#">Student Clubs</a></li>
+                        <li><a href="#">Alumni Network</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="row">
+                    <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                        <p class="mb-0">&copy; 2025 IIM Bodh Gaya. All rights reserved.</p>
+                    </div>
+                    <div class="col-md-6 text-center text-md-end">
+                        <p class="mb-0">
+                            <a href="#" style="margin-right: 15px;">Privacy Policy</a>
+                            <a href="#" style="margin-right: 15px;">Terms of Use</a>
+                            <a href="#">Sitemap</a>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="row mt-4">
+                    <div class="col-12 text-center" style="font-size: 0.9rem; opacity: 0.8;">
+                        <p class="mb-1"><strong>Director:</strong> Dr. Vinita S. Sahay</p>
+                        <p class="mb-0"><strong>Mentor Institution:</strong> IIM Calcutta</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const toggleBtn = document.getElementById('theme-toggle');
+            const icon = toggleBtn.querySelector('i');
+            const html = document.documentElement;
+
+            // Check for saved user preference
+            const savedTheme = localStorage.getItem('theme');
+
+            if (savedTheme === 'dark') {
+                html.setAttribute('data-theme', 'dark');
+                icon.classList.remove('bi-moon-fill');
+                icon.classList.add('bi-sun-fill');
+            }
+
+            // Handle Click Event
+            toggleBtn.addEventListener('click', () => {
+                const currentTheme = html.getAttribute('data-theme');
+
+                if (currentTheme === 'dark') {
+                    // Switch to Light
+                    html.removeAttribute('data-theme');
+                    localStorage.setItem('theme', 'light');
+                    icon.classList.remove('bi-sun-fill');
+                    icon.classList.add('bi-moon-fill');
+                } else {
+                    // Switch to Dark
+                    html.setAttribute('data-theme', 'dark');
+                    localStorage.setItem('theme', 'dark');
+                    icon.classList.remove('bi-moon-fill');
+                    icon.classList.add('bi-sun-fill');
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

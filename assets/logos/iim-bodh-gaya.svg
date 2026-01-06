@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1290 850" width="320" height="120">
+  <!-- Temple structure on top -->
+  <rect x="535" y="100" width="220" height="25" fill="#2B3990"/>
+  <rect x="565" y="75" width="160" height="25" fill="#2B3990"/>
+  <rect x="595" y="50" width="100" height="25" fill="#2B3990"/>
+
+  <!-- Concentric arches representing temple -->
+  <path d="M275 560 Q275 200, 645 200 Q1015 200, 1015 560" stroke="#2B3990" stroke-width="30" fill="none"/>
+  <path d="M320 560 Q320 240, 645 240 Q970 240, 970 560" stroke="#2B3990" stroke-width="30" fill="none"/>
+  <path d="M365 560 Q365 280, 645 280 Q925 280, 925 560" stroke="#2B3990" stroke-width="30" fill="none"/>
+  <path d="M410 560 Q410 320, 645 320 Q880 320, 880 560" stroke="#2B3990" stroke-width="30" fill="none"/>
+  <path d="M455 560 Q455 360, 645 360 Q835 360, 835 560" stroke="#2B3990" stroke-width="30" fill="none"/>
+  <path d="M500 560 Q500 400, 645 400 Q790 400, 790 560" stroke="#2B3990" stroke-width="30" fill="none"/>
+
+  <!-- Bodhi leaf in center -->
+  <ellipse cx="645" cy="500" rx="40" ry="80" fill="#F7B801"/>
+  <path d="M645 420 L645 580" stroke="#4A4A4A" stroke-width="4"/>
+
+  <!-- Optional small text mark -->
+  <g transform="translate(200,650)">
+    <text x="0" y="0" font-family="Open Sans, Arial" font-size="72" fill="#2B3990">IIM BODH GAYA</text>
+  </g>
+</svg>

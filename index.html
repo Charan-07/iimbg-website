@@ -1,0 +1,1586 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IIM Bodh Gaya - Creating Mindful Leaders</title>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.1/font/bootstrap-icons.min.css">
+
+    <style>
+        /* ===== ROOT VARIABLES - Colors & Theming ===== */
+        :root {
+            /* Base Palette */
+            --primary-navy: #1e3a8a;
+            --secondary-blue: #3b82f6;
+            --accent-blue: #0ea5e9;
+            --light-gray: #f8fafc;
+            --dark-text: #1e293b;
+            --white: #ffffff;
+
+            /* SEMANTIC THEME VARIABLES (Default Light) */
+            --bg-body: #ffffff;
+            --bg-section-alt: #f8fafc;
+            --bg-card: #ffffff;
+            --bg-nav-scrolled: rgba(255, 255, 255, 0.95);
+            --bg-dropdown: #ffffff;
+
+            --text-main: #1e293b;
+            --text-heading: #1e3a8a;
+            --text-nav-scrolled: #1e3a8a;
+            --text-muted: #666666;
+
+            --border-color: #e2e8f0;
+            --shadow-subtle: rgba(30, 58, 138, 0.08);
+            --shadow-hover: rgba(30, 58, 138, 0.2);
+
+            /* Footer Background - Default Blue Gradient */
+            --bg-footer: linear-gradient(135deg, #1e3a8a 0%, #0f172a 100%);
+
+            /* 3D Carousel Specifics (Light) */
+            --carousel-wrapper-bg: radial-gradient(circle at 50% 50%, rgba(30, 58, 138, 0.03) 0%, transparent 70%);
+            --carousel-card-bg: linear-gradient(135deg, #fff 0%, #f8fafc 100%);
+            --carousel-card-border: rgba(59, 130, 246, 0.15);
+
+            --carousel-control-top: 40vh;
+        }
+
+        /* DARK MODE OVERRIDES */
+        [data-theme="dark"] {
+            --bg-body: #121212;
+            --bg-section-alt: #1e1e1e;
+            /* Darker grey for alternating sections */
+            --bg-card: #262626;
+            --bg-nav-scrolled: rgba(18, 18, 18, 0.95);
+            --bg-dropdown: #262626;
+
+            --text-main: #e0e0e0;
+            --text-heading: #60a5fa;
+            /* Lighter blue for dark bg */
+            --text-nav-scrolled: #e0e0e0;
+            --text-muted: #a0a0a0;
+
+            --border-color: rgba(255, 255, 255, 0.1);
+            --shadow-subtle: rgba(0, 0, 0, 0.5);
+            --shadow-hover: rgba(0, 0, 0, 0.7);
+
+            /* Footer Background - Black Gradient */
+            --bg-footer: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+
+            /* 3D Carousel Specifics (Dark) */
+            --carousel-wrapper-bg: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.05) 0%, transparent 70%);
+            --carousel-card-bg: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
+            --carousel-card-border: rgba(255, 255, 255, 0.1);
+        }
+
+        /* ===== GLOBAL STYLES ===== */
+        html {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+            color: var(--text-main);
+            line-height: 1.6;
+            background-color: var(--bg-body);
+            margin: 0;
+            padding: 0;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+            font-weight: 700;
+            color: var(--text-heading);
+            transition: color 0.3s ease;
+        }
+
+        /* Raised shadow for all headings site-wide */
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            text-shadow: 0 6px 12px rgba(0, 0, 0, 0.25), 0 2px 4px rgba(0, 0, 0, 0.12);
+        }
+
+        /* ===== NAVIGATION BAR ===== */
+        .navbar {
+            background-color: transparent;
+            padding: 0.5rem 0;
+            box-shadow: none;
+            border-bottom: none;
+        }
+
+        .navbar-brand {
+            font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-navy) !important;
+        }
+
+        .navbar.sticky-top {
+            position: fixed !important;
+            top: 0;
+            left: 0;
+            right: 0;
+            width: 100%;
+            background: transparent;
+            z-index: 2200;
+            transition: background-color 0.25s ease, backdrop-filter 0.25s ease, color 0.2s ease;
+            will-change: background-color;
+        }
+
+        .site-logo {
+            max-height: 110px;
+            height: auto;
+            width: auto;
+            display: inline-block;
+            vertical-align: middle;
+            background: transparent;
+            border: none;
+            box-shadow: none;
+            outline: none;
+            padding: 0;
+            margin: -15px 0.5rem -15px 0;
+        }
+
+        /* Add a background to logo in dark mode ONLY when scrolled */
+        [data-theme="dark"] .navbar.scrolled .site-logo {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 5px;
+            padding: 5px;
+        }
+
+        .navbar-brand,
+        .navbar-brand img,
+        .navbar-brand * {
+            border: none !important;
+            box-shadow: none !important;
+            outline: none !important;
+            margin: 0 !important;
+            border-radius: 0 !important;
+        }
+
+        .navbar-nav .nav-link {
+            /* Default white text over hero video */
+            color: white !important;
+            margin: 0 0.5rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: var(--secondary-blue) !important;
+        }
+
+        /* Dropdowns */
+        .dropdown-menu {
+            background-color: var(--bg-dropdown);
+            border: 1px solid var(--border-color);
+        }
+
+        .dropdown-item {
+            color: var(--text-main);
+            transition: background-color 0.3s ease;
+        }
+
+        .dropdown-item:hover {
+            background-color: var(--bg-section-alt);
+            color: var(--secondary-blue);
+        }
+
+        /* Scrolled Navbar Styling */
+        .navbar.scrolled {
+            background: var(--bg-nav-scrolled);
+            backdrop-filter: blur(6px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar.scrolled .nav-link {
+            /* Logic for text color when scrolled: Blue in Light, White in Dark */
+            color: var(--text-nav-scrolled) !important;
+        }
+
+        /* Dark Mode Toggle Button */
+        .theme-toggle-btn {
+            background: none;
+            border: none;
+            color: white;
+            /* White initially over hero */
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 8px;
+            margin-left: 10px;
+            transition: color 0.3s ease;
+        }
+
+        .navbar.scrolled .theme-toggle-btn {
+            color: var(--text-nav-scrolled);
+        }
+
+        .theme-toggle-btn:hover {
+            color: var(--secondary-blue);
+        }
+
+        /* ===== HERO SECTION ===== */
+        .hero-section {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+            height: 100vh;
+            min-height: 640px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            color: white;
+            /* Always white over video */
+            margin-bottom: 1.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-content p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+
+        .hero-content h1,
+        .hero-content p,
+        .hero-content .btn-primary-custom {
+            text-shadow: 0 6px 18px rgba(0, 0, 0, 0.65), 0 2px 6px rgba(0, 0, 0, 0.45);
+        }
+
+        .hero-content {
+            opacity: 0;
+            transform: translateY(12px);
+            animation: heroFade 0.9s ease-out 0.25s forwards;
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+
+        @keyframes heroFade {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .btn-primary-custom {
+            background-color: white;
+            color: var(--primary-navy);
+            border: 2px solid white;
+            padding: 12px 40px;
+            font-weight: 600;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary-custom:hover {
+            background-color: transparent;
+            color: white;
+            border-color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 255, 255, 0.3);
+        }
+
+        /* ===== SECTION STYLES ===== */
+        .section-padding {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: var(--secondary-blue);
+        }
+
+        /* ===== STATS SECTION ===== */
+        .stats-section {
+            background-color: var(--primary-navy);
+            color: white;
+            padding: 60px 0;
+            /* Stats section stays navy even in dark mode */
+        }
+
+        .stat-box {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .stat-box h3 {
+            font-size: 3rem;
+            color: var(--accent-blue);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-box p {
+            font-size: 1.1rem;
+            margin: 0;
+        }
+
+        /* ===== FEATURES SECTION ===== */
+        .feature-card {
+            text-align: center;
+            padding: 30px;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            height: 100%;
+            background-color: var(--bg-card);
+            border: 2px solid var(--border-color);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px var(--shadow-hover);
+            border-color: var(--secondary-blue);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--secondary-blue);
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h4 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--text-heading);
+        }
+
+        .feature-card p {
+            color: var(--text-muted);
+        }
+
+        /* ===== PROGRAM CARDS ===== */
+        .program-card {
+            border: none;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            height: 100%;
+            box-shadow: 0 3px 10px var(--shadow-subtle);
+            background-color: var(--bg-card);
+        }
+
+        .program-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px var(--shadow-hover);
+        }
+
+        .program-card .card-header {
+            background: linear-gradient(135deg, var(--primary-navy) 0%, var(--secondary-blue) 100%);
+            color: white;
+            padding: 20px;
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+
+        .program-card .card-body {
+            padding: 25px;
+            color: var(--text-main);
+        }
+
+        .program-badge {
+            background-color: var(--accent-blue);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+
+        /* ===== NEWS CARDS ===== */
+        .news-card {
+            border: none;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 3px 15px var(--shadow-subtle);
+            transition: all 0.3s ease;
+            height: 100%;
+            background-color: var(--bg-card);
+        }
+
+        .news-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px var(--shadow-hover);
+        }
+
+        .news-card img {
+            height: 200px;
+            object-fit: cover;
+            width: 100%;
+        }
+
+        .news-card .card-body {
+            padding: 1.5rem;
+        }
+
+        .news-card .card-title {
+            color: var(--text-heading);
+        }
+
+        .news-card .card-text {
+            color: var(--text-muted);
+        }
+
+        /* ===== PLACEMENT SECTION ===== */
+        .placement-section {
+            background-color: var(--bg-section-alt);
+            transition: background-color 0.3s ease;
+        }
+
+        .placement-highlight {
+            background-color: var(--bg-card);
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 3px 15px var(--shadow-subtle);
+            height: 100%;
+            transition: background-color 0.3s ease;
+        }
+
+        .placement-highlight i {
+            font-size: 2.5rem;
+            color: var(--secondary-blue);
+            margin-bottom: 1rem;
+        }
+
+        .placement-highlight h4 {
+            font-size: 2rem;
+            color: var(--text-heading);
+            margin-bottom: 0.5rem;
+        }
+
+        .placement-highlight p {
+            color: var(--text-muted);
+        }
+
+        /* ===== CONTACT CARD STYLES ===== */
+        .contact-card {
+            border: none;
+            padding: 30px;
+            border-radius: 10px;
+            background: var(--bg-card);
+            box-shadow: 0 3px 15px var(--shadow-subtle);
+            height: 100%;
+            transition: background-color 0.3s ease;
+        }
+
+        .contact-card i {
+            font-size: 3rem;
+            color: var(--secondary-blue);
+        }
+
+        .contact-card h5 {
+            color: var(--text-heading);
+        }
+
+        .contact-card p {
+            color: var(--text-muted);
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            background: var(--bg-footer);
+            color: white;
+            padding: 50px 0 20px;
+            transition: background 0.3s ease;
+        }
+
+        .footer h5 {
+            color: var(--accent-blue);
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+        }
+
+        .footer a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer a:hover {
+            color: var(--accent-blue);
+        }
+
+        .footer ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .social-icons a {
+            color: white;
+            font-size: 1.5rem;
+            margin-right: 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            color: var(--accent-blue);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 3rem;
+            padding-top: 2rem;
+        }
+
+        /* ===== RESPONSIVE DESIGN ===== */
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+
+            .hero-content p {
+                font-size: 1rem;
+            }
+
+            .section-title h2 {
+                font-size: 1.8rem;
+            }
+
+            .stat-box h3 {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .site-logo {
+                max-height: 60px;
+            }
+        }
+
+        /* ===== CAROUSEL & 3D ELEMENTS ===== */
+        .hero-section {
+            position: relative;
+            height: 100vh;
+            min-height: 640px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+        }
+
+        #heroCarousel {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        .carousel-bg-video {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
+            pointer-events: none;
+            display: block;
+        }
+
+        #heroCarousel .carousel-inner {
+            position: relative;
+            z-index: 1;
+            height: 100%;
+        }
+
+        #heroCarousel .carousel-item {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.6s ease-in-out, opacity 0.6s ease-in-out;
+            will-change: transform;
+            opacity: 0;
+            transform: translateX(100%);
+            z-index: 1;
+        }
+
+        #heroCarousel .carousel-item.active {
+            opacity: 1;
+            transform: translateX(0);
+            z-index: 2;
+        }
+
+        #heroCarousel .carousel-item.carousel-item-next,
+        #heroCarousel .carousel-item.next {
+            transform: translateX(100%);
+        }
+
+        #heroCarousel .carousel-item.carousel-item-left,
+        #heroCarousel .carousel-item.carousel-item-start,
+        #heroCarousel .carousel-item.left,
+        #heroCarousel .carousel-item.start {
+            transform: translateX(0);
+        }
+
+        #heroCarousel .carousel-item.carousel-item-prev,
+        #heroCarousel .carousel-item.prev {
+            transform: translateX(-100%);
+        }
+
+        #heroCarousel.carousel .carousel-item-next.carousel-item-left,
+        #heroCarousel.carousel .carousel-item-prev.carousel-item-right {
+            transform: translateX(0);
+        }
+
+        #heroCarousel .carousel-control-prev,
+        #heroCarousel .carousel-control-next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 64px;
+            height: 64px;
+            background-color: rgba(0, 0, 0, 0.35);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.2s ease, opacity 0.2s ease;
+            opacity: 0.98;
+            z-index: 2100;
+            border: none;
+            backdrop-filter: blur(2px);
+        }
+
+        #heroCarousel .carousel-control-prev {
+            left: 2%;
+        }
+
+        #heroCarousel .carousel-control-next {
+            right: 2%;
+        }
+
+        #heroCarousel .carousel-control-prev-icon,
+        #heroCarousel .carousel-control-next-icon {
+            width: 28px;
+            height: 28px;
+            background-size: 100% 100%;
+            filter: invert(1) drop-shadow(0 1px 2px rgba(0, 0, 0, 0.45));
+        }
+
+        @media (max-width: 576px) {
+
+            #heroCarousel .carousel-control-prev,
+            #heroCarousel .carousel-control-next {
+                width: 44px;
+                height: 44px;
+                left: 8px;
+                right: 8px;
+            }
+        }
+
+        /* ===== FOCUS CAROUSEL SECTION - 3D Card Carousel ===== */
+        .carousel-3d-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 700px;
+            perspective: 2000px;
+            overflow: visible;
+            /* Use Variable for BG */
+            background: var(--carousel-wrapper-bg);
+            border-radius: 20px;
+            padding: 20px;
+            transform-style: preserve-3d;
+            margin-bottom: -350px;
+            margin-top: 100px;
+            transform: rotateX(10deg);
+            transition: background 0.3s ease;
+        }
+
+        .carousel-3d {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+            animation: rotate 60s linear infinite;
+            transition: animation-play-state 0.3s ease;
+        }
+
+        .carousel-card {
+            position: absolute;
+            width: 300px;
+            height: 180px;
+            left: 50%;
+            top: 50%;
+            margin-left: -150px;
+            margin-top: -90px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            /* Use Variables for Card BG and Border */
+            background: var(--carousel-card-bg);
+            border-radius: 12px;
+            padding: 16px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--carousel-card-border);
+            backface-visibility: hidden;
+            transition: background 0.3s ease, border-color 0.3s ease;
+        }
+
+        /* Adjust internal elements of the 3D card */
+        .carousel-card-text p:first-child {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-heading);
+            margin: 0 0 6px 0;
+            letter-spacing: -0.3px;
+        }
+
+        .carousel-card-text p:last-child {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            margin: 0;
+            padding: 0 8px;
+        }
+
+        /* Ensure logos are visible in dark mode */
+        [data-theme="dark"] .carousel-card-img img {
+            /* Lighten logos slightly if they are too dark, or add a white glow */
+            filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.5));
+        }
+
+        @keyframes rotate {
+            from {
+                transform: rotateY(0deg);
+            }
+
+            to {
+                transform: rotateY(360deg);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .carousel-3d-wrapper {
+                min-height: 460px;
+                padding: 30px 15px;
+            }
+
+            .carousel-3d {
+                width: 450px;
+                height: 390px;
+                animation: rotate 20s linear infinite;
+            }
+
+            .carousel-card {
+                width: 190px;
+                height: 230px;
+                margin-left: -95px;
+                margin-top: -115px;
+                padding: 14px;
+            }
+
+            .carousel-card-img {
+                width: 120px;
+                height: 85px;
+                margin-bottom: 10px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .carousel-3d-wrapper {
+                min-height: 350px;
+                padding: 20px 10px;
+                scale: 0.9;
+            }
+
+            .carousel-3d {
+                width: 280px;
+                height: 260px;
+                animation: rotate 20s linear infinite;
+            }
+
+            .carousel-card {
+                width: 140px;
+                height: 180px;
+                margin-left: -70px;
+                margin-top: -90px;
+                padding: 14px;
+            }
+
+            .carousel-card-img {
+                width: 90px;
+                height: 65px;
+                margin-bottom: 8px;
+            }
+        }
+
+        #placements {
+            padding-bottom: 0px !important;
+        }
+
+        #campus {
+            padding-top: 60px !important;
+        }
+
+        /* Helper for backgrounds */
+        .bg-light-alt {
+            background-color: var(--bg-section-alt) !important;
+            transition: background-color 0.3s ease;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top">
+        <div class="container-fluid px-5">
+            <a class="navbar-brand d-flex align-items-center" href="#home">
+                <img src="assets/logos/IIMBG TRANSPARENT.png" alt="IIM Bodh Gaya" class="site-logo me-2">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="faculty.html">Faculty</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            Programs
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#programs">All Programs</a></li>
+                            <li><a class="dropdown-item" href="mba.html">MBA/PGPM</a></li>
+                            <li><a class="dropdown-item" href="dbm.html">MBA-DBM</a></li>
+                            <li><a class="dropdown-item" href="hhm.html">MBA-HHM</a></li>
+                            <li><a class="dropdown-item" href="ipm.html">IPM</a></li>
+                            <li><a class="dropdown-item" href="emba.html">Executive MBA</a></li>
+                            <li><a class="dropdown-item" href="phd.html">PhD</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="placements.html">Placements</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="campuslife.html">Campus Life</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contact</a>
+                    </li>
+
+                    <li class="nav-item ms-2">
+                        <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle Dark Mode">
+                            <i class="bi bi-moon-fill"></i>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section id="home" class="hero-section">
+        <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel">
+            <video class="carousel-bg-video" autoplay muted loop playsinline>
+                <source src="assets/video/hero.mp4" type="video/mp4">
+                Your browser does not support the video tag. Please update your browser.
+            </video>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <div class="container">
+                        <div class="hero-content">
+                            <h1>Creating Mindful Leaders</h1>
+                            <p>Shaping socially responsible managers and emotionally mature leaders</p>
+                            <a href="#programs" class="btn btn-primary-custom">Explore Programs</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="container">
+                        <div class="hero-content">
+                            <h1>100% Placement Record</h1>
+                            <p>Average package ₹16 LPA with highest at ₹48.58 LPA</p>
+                            <a href="#placements" class="btn btn-primary-custom">View Placements</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="container">
+                        <div class="hero-content">
+                            <h1>World-Class Education</h1>
+                            <p>Ranked 31st in NIRF 2024 | Mentored by IIM Calcutta</p>
+                            <a href="#about" class="btn btn-primary-custom">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="container">
+                        <div class="hero-content">
+                            <h1>Global Opportunities</h1>
+                            <p>20+ international collaborations across continents</p>
+                            <a href="#contact" class="btn btn-primary-custom">Get In Touch</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </section>
+
+    <section class="stats-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+                    <div class="stat-box">
+                        <h3>16th</h3>
+                        <p>IIM Established in India</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+                    <div class="stat-box">
+                        <h3>31st</h3>
+                        <p>NIRF Ranking 2024</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+                    <div class="stat-box">
+                        <h3>100%</h3>
+                        <p>Placement Rate</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="stat-box">
+                        <h3>20+</h3>
+                        <p>International Collaborations</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="section-padding">
+        <div class="container">
+            <div class="section-title">
+                <h2>About IIM Bodh Gaya</h2>
+            </div>
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-4 mb-lg-0">
+                    <img src="assets/images/A10.jpg" alt="IIM Bodh Gaya Campus" class="img-fluid rounded shadow">
+                </div>
+                <div class="col-lg-6">
+                    <h3 class="mb-4">Excellence in Management Education</h3>
+                    <p class="lead">The Indian Institute of Management Bodh Gaya (IIM-BG) was established in 2015 as the
+                        16th Indian Institute of Management. Located in the spiritual land of Bodh Gaya, Bihar, the
+                        institute is mentored by the prestigious IIM Calcutta.</p>
+                    <p>Under the leadership of Director Dr. Vinita S. Sahay (appointed 2018), IIM-BG has consistently
+                        grown its academic excellence and research output. The institute is committed to creating
+                        socially responsible managers and emotionally mature, mindful leaders who can make meaningful
+                        contributions to society.</p>
+                    <p>With a strong focus on holistic development, IIM-BG offers a unique blend of rigorous academics,
+                        mindfulness practices, and social immersion programs that prepare students for leadership roles
+                        in a complex, interconnected world.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-padding bg-light-alt">
+        <div class="container">
+            <div class="section-title">
+                <h2>Why Choose IIM Bodh Gaya</h2>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <i class="bi bi-trophy-fill feature-icon"></i>
+                        <h4>Top Rankings</h4>
+                        <p>Ranked 31st in NIRF Management Category 2024, consistently improving year over year with
+                            quality education.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <i class="bi bi-people-fill feature-icon"></i>
+                        <h4>Expert Faculty</h4>
+                        <p>Learn from experienced faculty members with strong academic and industry backgrounds from top
+                            global institutions.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <i class="bi bi-building feature-icon"></i>
+                        <h4>Modern Infrastructure</h4>
+                        <p>State-of-the-art smart classrooms, 24x7 digital library, and excellent residential facilities
+                            for holistic learning.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <i class="bi bi-briefcase-fill feature-icon"></i>
+                        <h4>100% Placements</h4>
+                        <p>Consistent track record of 100% placements with top companies like Amazon, Deloitte, and
+                            ICICI Bank recruiting.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <i class="bi bi-globe feature-icon"></i>
+                        <h4>Global Network</h4>
+                        <p>20+ international collaborations with institutions across France, Greece, South Korea, Italy,
+                            and Mexico for exchange programs.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <i class="bi bi-heart-fill feature-icon"></i>
+                        <h4>Mindfulness Center</h4>
+                        <p>Unique Samadhvam Mindfulness Centre for stress management, meditation, and developing
+                            emotionally mature leaders.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="programs" class="section-padding">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Programs</h2>
+            </div>
+            <div class="row g-4">
+                <div class="col-lg-6">
+                    <div class="card program-card">
+                        <div class="card-header">
+                            MBA / PGPM
+                        </div>
+                        <div class="card-body">
+                            <span class="program-badge">2 Years Full-Time</span>
+                            <p><strong>Post Graduate Programme in Management</strong></p>
+                            <ul>
+                                <li>Admission: CAT (Indian), GMAT (International)</li>
+                                <li>Specializations: Marketing, Finance, HR, Operations, Strategy</li>
+                                <li>Fees: ₹15.5 Lakhs</li>
+                                <li>100% Placement Record</li>
+                            </ul>
+                            <a href="#contact" class="btn btn-primary-custom btn-sm">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="card program-card">
+                        <div class="card-header">
+                            IPM
+                        </div>
+                        <div class="card-body">
+                            <span class="program-badge">5 Years Integrated</span>
+                            <p><strong>Integrated Programme in Management</strong></p>
+                            <ul>
+                                <li>Admission: JIPMAT Exam</li>
+                                <li>Awards: BBM + MBA Degrees</li>
+                                <li>Fees: ₹28.5 Lakhs</li>
+                                <li>Direct path from high school to MBA</li>
+                            </ul>
+                            <a href="#contact" class="btn btn-primary-custom btn-sm">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="card program-card">
+                        <div class="card-header">
+                            MBA in Hospital & Healthcare Management
+                        </div>
+                        <div class="card-body">
+                            <span class="program-badge">2 Years Full-Time</span>
+                            <p><strong>Specialized Healthcare Program</strong></p>
+                            <ul>
+                                <li>Admission: CAT Exam</li>
+                                <li>Specializations: Hospital Management, Healthcare Management</li>
+                                <li>Focus on growing healthcare industry</li>
+                                <li>Industry-relevant curriculum</li>
+                            </ul>
+                            <a href="#contact" class="btn btn-primary-custom btn-sm">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="card program-card">
+                        <div class="card-header">
+                            Executive MBA (Online)
+                        </div>
+                        <div class="card-body">
+                            <span class="program-badge">2 Years Part-Time</span>
+                            <p><strong>For Working Professionals</strong></p>
+                            <ul>
+                                <li>Fees: ₹10 Lakhs</li>
+                                <li>3 Campus Immersions included</li>
+                                <li>Partnership with TeamLease EdTech</li>
+                                <li>Flexible online learning</li>
+                            </ul>
+                            <a href="#contact" class="btn btn-primary-custom btn-sm">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="placements" class="section-padding placement-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Placement Highlights 2023</h2>
+            </div>
+            <div class="row g-4 mb-5">
+                <div class="col-md-4">
+                    <div class="placement-highlight">
+                        <i class="bi bi-check-circle-fill"></i>
+                        <h4>100%</h4>
+                        <p>Placement Rate</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="placement-highlight">
+                        <i class="bi bi-graph-up-arrow"></i>
+                        <h4>₹16 LPA</h4>
+                        <p>Average Package (33% increase)</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="placement-highlight">
+                        <i class="bi bi-star-fill"></i>
+                        <h4>₹48.58 LPA</h4>
+                        <p>Highest Package</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="card" style="border: none; background: transparent; padding: 30px;">
+                        <h4 class="text-center mb-4">Top Recruiting Companies</h4>
+
+                        <div class="carousel-3d-wrapper">
+                            <div class="carousel-3d" id="carousel3d"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="campus" class="section-padding">
+        <div class="container">
+            <div class="section-title">
+                <h2>Campus Life & Facilities</h2>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <div class="card news-card">
+                        <img src="assets/images/A3.jpg" alt="Smart Classrooms">
+                        <div class="card-body">
+                            <h5 class="card-title">Smart Classrooms</h5>
+                            <p class="card-text">State-of-the-art learning spaces equipped with modern technology for
+                                interactive and engaging education.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card news-card">
+                        <img src="assets/images/A12.jpg" alt="Digital Library">
+                        <div class="card-body">
+                            <h5 class="card-title">24x7 Digital Library</h5>
+                            <p class="card-text">Extensive collection of books, journals, and digital resources
+                                accessible round-the-clock for research and learning.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card news-card">
+                        <img src="assets/images/A13.jpg" alt="Mindfulness Center">
+                        <div class="card-body">
+                            <h5 class="card-title">Samadhvam Mindfulness Centre</h5>
+                            <p class="card-text">Unique facility dedicated to stress management, meditation, and
+                                developing emotionally intelligent leaders.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card news-card">
+                        <img src="assets/images/A14.jpg" alt="Sports Facilities">
+                        <div class="card-body">
+                            <h5 class="card-title">Sports & Recreation</h5>
+                            <p class="card-text">Comprehensive sports facilities including outdoor courts, indoor games,
+                                and fitness center for holistic development.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="section-padding bg-light-alt">
+        <div class="container">
+            <div class="section-title">
+                <h2>Get In Touch</h2>
+            </div>
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <div class="contact-card text-center">
+                        <i class="bi bi-geo-alt-fill"></i>
+                        <h5 class="mt-3 mb-3">Campus Address</h5>
+                        <p>Indian Institute of Management<br>
+                            Uruvela, Prabandh Vihar<br>
+                            Bodh Gaya - 824234<br>
+                            Gaya, Bihar, India</p>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="contact-card text-center">
+                        <i class="bi bi-telephone-fill"></i>
+                        <h5 class="mt-3 mb-3">Phone Numbers</h5>
+                        <p><strong>General Inquiry:</strong><br>
+                            +91-631-2200235<br>
+                            +91-631-2200238<br>
+                            +91-631-2200239<br><br>
+                            <strong>Admissions:</strong><br>
+                            +91-631-2200239
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="contact-card text-center">
+                        <i class="bi bi-envelope-fill"></i>
+                        <h5 class="mt-3 mb-3">Email Addresses</h5>
+                        <p><strong>Director Office:</strong><br>
+                            director_office@iimbg.ac.in<br><br>
+                            <strong>Admissions:</strong><br>
+                            pgpadmission@iimbg.ac.in<br>
+                            ipmadmission@iimbg.ac.in<br><br>
+                            <strong>Placements:</strong><br>
+                            placement@iimbg.ac.in
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <h5>About IIM Bodh Gaya</h5>
+                    <p>Indian Institute of Management Bodh Gaya is committed to creating socially responsible managers
+                        and emotionally mature, mindful leaders who can make meaningful contributions to society.</p>
+                    <div class="social-icons mt-4">
+                        <a href="https://www.facebook.com/iimbodhgaya" target="_blank" rel="noopener"
+                            aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+                        <a href="https://x.com/iimbodhgaya" target="_blank" rel="noopener" aria-label="X"><i
+                                class="bi bi-twitter-x"></i></a>
+                        <a href="https://www.linkedin.com/school/iimbg/posts/?feedView=all" target="_blank"
+                            rel="noopener" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+                        <a href="https://www.instagram.com/iimbodhgaya/" target="_blank" rel="noopener"
+                            aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+                        <a href="https://www.youtube.com/@MediaPRCellIIMBodhGaya" target="_blank" rel="noopener"
+                            aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+                    </div>
+                </div>
+
+                <div class="col-lg-2 col-md-6">
+                    <h5>Quick Links</h5>
+                    <ul>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#programs">Programs</a></li>
+                        <li><a href="#placements">Placements</a></li>
+                        <li><a href="#campus">Campus Life</a></li>
+                        <li><a href="#contact">Contact Us</a></li>
+                        <li><a href="#">Careers</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <h5>Academic Programs</h5>
+                    <ul>
+                        <li><a href="#programs">MBA / PGPM</a></li>
+                        <li><a href="#programs">Integrated Programme (IPM)</a></li>
+                        <li><a href="#programs">MBA - Healthcare Management</a></li>
+                        <li><a href="#programs">Executive MBA (Online)</a></li>
+                        <li><a href="#programs">Ph.D. Program</a></li>
+                        <li><a href="#">Faculty Development</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <h5>Important Links</h5>
+                    <ul>
+                        <li><a href="#">Board of Governors</a></li>
+                        <li><a href="#">Faculty Directory</a></li>
+                        <li><a href="#">Right to Information</a></li>
+                        <li><a href="#">Tenders & Notices</a></li>
+                        <li><a href="#">Anti-Ragging Policy</a></li>
+                        <li><a href="#">Student Clubs</a></li>
+                        <li><a href="#">Alumni Network</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="row">
+                    <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                        <p class="mb-0">&copy; 2025 IIM Bodh Gaya. All rights reserved.</p>
+                    </div>
+                    <div class="col-md-6 text-center text-md-end">
+                        <p class="mb-0">
+                            <a href="#" style="margin-right: 15px;">Privacy Policy</a>
+                            <a href="#" style="margin-right: 15px;">Terms of Use</a>
+                            <a href="#">Sitemap</a>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="row mt-4">
+                    <div class="col-12 text-center" style="font-size: 0.9rem; opacity: 0.8;">
+                        <p class="mb-1"><strong>Director:</strong> Dr. Vinita S. Sahay</p>
+                        <p class="mb-0"><strong>Mentor Institution:</strong> IIM Calcutta</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // --- 1. Dark Mode Logic ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const toggleBtn = document.getElementById('theme-toggle');
+            const icon = toggleBtn.querySelector('i');
+            const html = document.documentElement;
+
+            // Check for saved user preference
+            const savedTheme = localStorage.getItem('theme');
+
+            if (savedTheme === 'dark') {
+                html.setAttribute('data-theme', 'dark');
+                icon.classList.remove('bi-moon-fill');
+                icon.classList.add('bi-sun-fill');
+            }
+
+            // Handle Click Event
+            toggleBtn.addEventListener('click', () => {
+                const currentTheme = html.getAttribute('data-theme');
+
+                if (currentTheme === 'dark') {
+                    // Switch to Light
+                    html.removeAttribute('data-theme');
+                    localStorage.setItem('theme', 'light');
+                    icon.classList.remove('bi-sun-fill');
+                    icon.classList.add('bi-moon-fill');
+                } else {
+                    // Switch to Dark
+                    html.setAttribute('data-theme', 'dark');
+                    localStorage.setItem('theme', 'dark');
+                    icon.classList.remove('bi-moon-fill');
+                    icon.classList.add('bi-sun-fill');
+                }
+            });
+        });
+
+        // --- 2. Smooth scrolling for anchor links ---
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    // Close mobile menu if open
+                    const navbarCollapse = document.querySelector('.navbar-collapse');
+                    if (navbarCollapse.classList.contains('show')) {
+                        navbarCollapse.classList.remove('show');
+                    }
+                }
+            });
+        });
+
+        // --- 3. Scrolled Navbar Logic ---
+        (function () {
+            const navbar = document.querySelector('.navbar.sticky-top');
+            const hero = document.querySelector('.hero-section');
+            if (!navbar) return;
+
+            function getThreshold() {
+                if (!hero) return window.innerHeight * 0.6;
+                const rect = hero.getBoundingClientRect();
+                return window.scrollY + rect.bottom;
+            }
+
+            function update() {
+                const sc = window.scrollY || 0;
+                const threshold = getThreshold();
+                if (sc >= threshold) navbar.classList.add('scrolled');
+                else navbar.classList.remove('scrolled');
+            }
+
+            window.addEventListener('scroll', function () {
+                window.requestAnimationFrame(update);
+            }, { passive: true });
+
+            window.addEventListener('resize', function () {
+                window.requestAnimationFrame(update);
+            });
+
+            // init
+            update();
+        })();
+
+        // --- 4. 3D Rotating Carousel ---
+        (function () {
+            const companies = [
+                { name: 'ICICI Bank', initials: 'IB', color: '#1e3a8a' },
+                { name: 'HSBC', initials: 'HS', color: '#c80f2e' },
+                { name: 'BNY Mellon', initials: 'BM', color: '#003da5' },
+                { name: 'NSE', initials: 'NS', color: '#0066cc' },
+                { name: 'HDFC Bank', initials: 'HB', color: '#e41f23' },
+                { name: 'PWC', initials: 'PW', color: '#cc0000' },
+                { name: 'Axis Bank', initials: 'AB', color: '#004687' },
+                { name: 'Cognizant', initials: 'CG', color: '#0074bc' },
+                { name: 'Yamaha', initials: 'YM', color: '#1552a0' },
+                { name: 'Ultratech', initials: 'UT', color: '#0e3b3b' },
+                { name: 'HCLTech', initials: 'HC', color: '#0066b3' },
+                { name: 'Tiger Analytics', initials: 'TA', color: '#f47e20' },
+                { name: 'SAP', initials: 'SP', color: '#0ccff3' },
+                { name: 'Accenture', initials: 'AC', color: '#a100f2' },
+                { name: 'Kotak', initials: 'KO', color: '#000000' },
+                { name: 'V Guard', initials: 'VG', color: '#ff6600' },
+                { name: 'Tata Power', initials: 'TP', color: '#1b3a99' },
+                { name: 'Apollo Hospitals', initials: 'AH', color: '#e80012' },
+                { name: 'BenQ', initials: 'BQ', color: '#1e90ff' },
+                { name: 'Synclature', initials: 'SY', color: '#003d99' },
+                { name: 'CRISIL', initials: 'CR', color: '#0066cc' },
+                { name: 'Infosys', initials: 'IF', color: '#00a1de' },
+                { name: 'L&T', initials: 'LT', color: '#003d82' },
+                { name: 'Aditya Birla Hindalco', initials: 'AB', color: '#005eb8' }
+            ];
+
+            // Generate SVG logo
+            function generateSvgLogo(initials, color) {
+                const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+                    <defs>
+                        <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:${color};stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:${adjustBrightness(color, -30)};stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                    <rect width="200" height="200" rx="20" fill="url(#grad)"/>
+                    <text x="100" y="115" font-size="70" font-weight="700" fill="white" text-anchor="middle" font-family="Arial, sans-serif">
+                        ${initials}
+                    </text>
+                </svg>`;
+                return 'data:image/svg+xml;base64,' + btoa(svg);
+            }
+
+            // Adjust color brightness
+            function adjustBrightness(color, percent) {
+                const num = parseInt(color.replace("#", ""), 16);
+                const amt = Math.round(2.55 * percent);
+                const R = (num >> 16) + amt;
+                const G = (num >> 8 & 0x00FF) + amt;
+                const B = (num & 0x0000FF) + amt;
+                return "#" + (0x1000000 + (R < 255 ? R < 1 ? 0 : R : 255) * 0x10000 +
+                    (G < 255 ? G < 1 ? 0 : G : 255) * 0x100 + (B < 255 ? B < 1 ? 0 : B : 255))
+                    .toString(16).slice(1);
+            }
+
+            const carousel3d = document.getElementById('carousel3d');
+            const cardWidth = 300;
+            const gap = 20;
+            const totalCards = companies.length;
+            const radius = Math.round(((cardWidth + gap) * totalCards) / (2 * Math.PI));
+
+            companies.forEach((company, index) => {
+                const angle = (index / totalCards) * 360;
+                const card = document.createElement('div');
+                card.className = 'carousel-card';
+
+                const logoSvg = generateSvgLogo(company.initials, company.color);
+
+                card.innerHTML = `
+        <div class="carousel-card-img">
+            <img src="${logoSvg}" alt="${company.name}" />
+        </div>
+        <div class="carousel-card-text">
+            <p>${company.name}</p>
+        </div>
+    `;
+
+                card.style.transform = `rotateY(${angle}deg) translateZ(${radius}px)`;
+                carousel3d.appendChild(card);
+            });
+
+            document.querySelector('.carousel-3d-wrapper').style.perspective = (radius * 4) + "px";
+        })();
+    </script>
+</body>
+
+</html>

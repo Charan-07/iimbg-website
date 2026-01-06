@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MBA Program — IIM Bodh Gaya</title>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.1/font/bootstrap-icons.min.css">
+
+    <style>
+        /* ===== ROOT VARIABLES - Colors & Theming ===== */
+        :root {
+            /* Base Palette */
+            --primary-navy: #1e3a8a;
+            --secondary-blue: #3b82f6;
+            --accent-blue: #0ea5e9;
+            --light-gray: #f8fafc;
+            --dark-text: #1e293b;
+            --white: #ffffff;
+
+            /* SEMANTIC THEME VARIABLES (Default Light) */
+            --bg-body: #ffffff;
+            --bg-nav: #ffffff;
+            --bg-section-alt: #f8fafc;
+            --bg-card: #ffffff;
+            --bg-table: #ffffff;
+            --bg-accordion: #ffffff;
+            --bg-accordion-btn: #f8fafc;
+            --bg-alert: #f8f9fa;
+
+            --text-main: #1e293b;
+            --text-heading: #1e3a8a;
+            --text-nav: #1e3a8a;
+            --text-muted: #6c757d;
+
+            --border-color: #e2e8f0;
+            --shadow-subtle: rgba(0, 0, 0, 0.05);
+            --shadow-hover: rgba(0, 0, 0, 0.1);
+
+            --logo-bg: transparent;
+
+            /* Footer Background - Default Blue Gradient */
+            --bg-footer: linear-gradient(135deg, #1e3a8a 0%, #0f172a 100%);
+        }
+
+        /* DARK MODE OVERRIDES */
+        [data-theme="dark"] {
+            --bg-body: #121212;
+            --bg-nav: #1e1e1e;
+            --bg-section-alt: #1e1e1e;
+            /* Darker grey section */
+            --bg-card: #262626;
+            --bg-table: #262626;
+            --bg-accordion: #262626;
+            --bg-accordion-btn: #1a1a1a;
+            --bg-alert: #2a2a2a;
+
+            --text-main: #e0e0e0;
+            --text-heading: #60a5fa;
+            /* Lighter Blue for visibility */
+            --text-nav: #e0e0e0;
+            --text-muted: #a0a0a0;
+
+            --border-color: rgba(255, 255, 255, 0.1);
+            --shadow-subtle: rgba(0, 0, 0, 0.5);
+            --shadow-hover: rgba(0, 0, 0, 0.7);
+
+            --logo-bg: rgba(255, 255, 255, 0.9);
+
+            /* Footer Background - Dark Mode Black Gradient */
+            --bg-footer: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+        }
+
+        /* ===== GLOBAL STYLES ===== */
+        body {
+            font-family: 'Open Sans', sans-serif;
+            color: var(--text-main);
+            background-color: var(--bg-body);
+            line-height: 1.6;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: 'Open Sans', sans-serif;
+            font-weight: 700;
+            color: var(--text-heading);
+            text-shadow: 0 6px 12px rgba(0, 0, 0, 0.25), 0 2px 4px rgba(0, 0, 0, 0.12);
+            transition: color 0.3s ease;
+        }
+
+        /* ===== NAVIGATION ===== */
+        .navbar {
+            background-color: var(--bg-nav);
+            padding: 0.5rem 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border-bottom: 3px solid var(--secondary-blue);
+            transition: background-color 0.3s ease;
+        }
+
+        .navbar-brand img {
+            max-height: 110px;
+        }
+
+        .site-logo {
+            max-height: 110px;
+            height: auto;
+            width: auto;
+            display: inline-block;
+            vertical-align: middle;
+            margin: -15px 0.5rem -15px 0;
+            background: var(--logo-bg);
+            border-radius: 8px;
+            padding: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .navbar-brand,
+        .navbar-brand img {
+            border: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+
+        .nav-link {
+            color: var(--text-nav) !important;
+            font-weight: 500;
+            margin: 0 0.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--secondary-blue) !important;
+        }
+
+        /* Dropdowns */
+        .dropdown-menu {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+        }
+
+        .dropdown-item {
+            color: var(--text-main);
+            transition: background-color 0.3s ease;
+        }
+
+        .dropdown-item:hover {
+            background-color: var(--bg-body);
+            color: var(--secondary-blue);
+        }
+
+        /* Dark Mode Toggle Button */
+        .theme-toggle-btn {
+            background: none;
+            border: none;
+            color: var(--text-nav);
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 8px;
+            margin-left: 10px;
+            transition: color 0.3s ease;
+        }
+
+        .theme-toggle-btn:hover {
+            color: var(--secondary-blue);
+        }
+
+        /* ===== HERO ===== */
+        .hero-section {
+            background: linear-gradient(135deg, var(--primary-navy) 0%, var(--secondary-blue) 100%);
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .hero-section h1 {
+            color: white !important;
+            margin-bottom: 1rem;
+        }
+
+        .hero-section p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.2rem;
+        }
+
+        .section-padding {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title h2 {
+            font-size: 2.25rem;
+            position: relative;
+            padding-bottom: 1rem;
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: var(--secondary-blue);
+        }
+
+        /* ===== HIGHLIGHT CARDS & GENERAL CARDS ===== */
+        .highlight-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 25px;
+            height: 100%;
+            transition: transform 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+            text-align: center;
+        }
+
+        .highlight-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--secondary-blue);
+            box-shadow: 0 10px 20px var(--shadow-hover);
+        }
+
+        .highlight-icon {
+            font-size: 2.5rem;
+            color: var(--accent-blue);
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .highlight-title {
+            font-weight: 700;
+            color: var(--text-heading);
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        /* General Cards (like in Fees section) */
+        .card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            transition: background-color 0.3s ease;
+        }
+
+        .card-header {
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .list-group-item {
+            background-color: var(--bg-card);
+            color: var(--text-main);
+            border-color: var(--border-color);
+        }
+
+        .alert-light {
+            background-color: var(--bg-alert);
+            border-color: var(--border-color);
+            color: var(--text-main);
+        }
+
+        /* ===== TABLES & TABS ===== */
+        .nav-tabs .nav-link {
+            color: var(--text-main);
+            font-weight: 600;
+            border-color: transparent;
+        }
+
+        .nav-tabs .nav-link:hover {
+            border-color: var(--border-color);
+            isolation: isolate;
+        }
+
+        .nav-tabs .nav-link.active {
+            color: var(--secondary-blue);
+            background-color: var(--bg-body);
+            border-color: var(--border-color) var(--border-color) var(--bg-body);
+            border-bottom: 3px solid var(--secondary-blue);
+        }
+
+        .course-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            overflow: hidden;
+            background-color: var(--bg-table);
+        }
+
+        .course-table th {
+            background-color: var(--primary-navy);
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+
+        .course-table td {
+            padding: 15px;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-main);
+        }
+
+        .course-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Accordion Styles */
+        .accordion-item {
+            background-color: var(--bg-accordion);
+            border-color: var(--border-color);
+        }
+
+        .accordion-button {
+            background-color: var(--bg-accordion-btn);
+            color: var(--text-heading);
+            font-weight: 600;
+        }
+
+        .accordion-button:not(.collapsed) {
+            background-color: var(--secondary-blue);
+            color: white;
+        }
+
+        .accordion-button::after {
+            filter: grayscale(1);
+        }
+
+        .accordion-button:not(.collapsed)::after {
+            filter: invert(1) grayscale(100%) brightness(200%);
+        }
+
+        .accordion-button:focus {
+            box-shadow: none;
+        }
+
+        .accordion-body {
+            color: var(--text-main);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--bg-footer);
+            color: white;
+            padding: 50px 0 20px;
+            transition: background 0.3s ease;
+        }
+
+        .footer h5 {
+            color: var(--accent-blue);
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+        }
+
+        .footer a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer a:hover {
+            color: var(--accent-blue);
+        }
+
+        .footer ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .social-icons a {
+            color: white;
+            font-size: 1.5rem;
+            margin-right: 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            color: var(--accent-blue);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 3rem;
+            padding-top: 2rem;
+        }
+
+        /* Helper classes */
+        .text-primary-navy {
+            color: var(--text-heading) !important;
+        }
+
+        .text-muted {
+            color: var(--text-muted) !important;
+        }
+
+        .bg-light-alt {
+            background-color: var(--bg-section-alt) !important;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top">
+        <div class="container-fluid px-5">
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+                <img src="assets/logos/IIMBG TRANSPARENT.png" alt="IIM Bodh Gaya" class="site-logo me-2">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="faculty.html">Faculty</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle active" href="#" role="button"
+                            data-bs-toggle="dropdown">Programs</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#programs">All Programs</a></li>
+                            <li><a class="dropdown-item" href="mba.html">MBA/PGPM</a></li>
+                            <li><a class="dropdown-item" href="dbm.html">MBA-DBM</a></li>
+                            <li><a class="dropdown-item" href="hhm.html">MBA-HHM</a></li>
+                            <li><a class="dropdown-item" href="ipm.html">IPM</a></li>
+                            <li><a class="dropdown-item" href="emba.html">Executive MBA</a></li>
+                            <li><a class="dropdown-item" href="phd.html">PhD</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="placements.html">Placements</a></li>
+                    <li class="nav-item"><a class="nav-link" href="campuslife.html">Campus Life</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+
+                    <li class="nav-item ms-2">
+                        <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle Dark Mode">
+                            <i class="bi bi-moon-fill"></i>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <section class="hero-section">
+            <div class="container">
+                <h1>Master of Business Administration (MBA)</h1>
+                <p>Equipping students for an industry-led career in the global environment</p>
+            </div>
+        </section>
+
+        <section class="section-padding">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-6">
+                        <h2 class="mb-4 text-primary-navy">Program Overview</h2>
+                        <p class="lead">The 2-year Programme in Master of Business Administration (MBA) imparts
+                            theoretical and practical erudition of different functional areas of Management.</p>
+                        <p>The programme is designed to enhance our students with a strong awareness and knowledge about
+                            the socio-economic environment both at national and global levels. The objective is to bring
+                            into being a <strong>Global Manager</strong> not only with strong analytical and
+                            decision-making skills but an overall personality with socially enviable values and ethics.
+                        </p>
+                        <p>To achieve this, the curriculum uses a range of audio-visual based teaching methodologies
+                            like case studies, real-life problem solving, role-play, group discussion, and computer
+                            simulation.</p>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="highlight-card">
+                                    <i class="bi bi-globe highlight-icon"></i>
+                                    <div class="highlight-title">Global Exposure</div>
+                                    <p class="small text-muted">International Student Exchange Programme with reputed
+                                        institutes worldwide.</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="highlight-card">
+                                    <i class="bi bi-people highlight-icon"></i>
+                                    <div class="highlight-title">Batch Diversity</div>
+                                    <p class="small text-muted">Proactive approach to promote equality in gender,
+                                        ethnicity, and education.</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="highlight-card">
+                                    <i class="bi bi-journal-richtext highlight-icon"></i>
+                                    <div class="highlight-title">Case Study Method</div>
+                                    <p class="small text-muted">Pedagogy stresses learning with extensive case study
+                                        discussions.</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="highlight-card">
+                                    <i class="bi bi-tree highlight-icon"></i>
+                                    <div class="highlight-title">Sustainability</div>
+                                    <p class="small text-muted">Focus on ethical leadership and leaving the planet
+                                        better for future generations.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-padding bg-light-alt">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Curriculum Structure</h2>
+                    <p class="text-muted">Rigorous academic framework designed for holistic development</p>
+                </div>
+
+                <div class="row mb-5">
+                    <div class="col-lg-12">
+                        <div class="alert alert-light border shadow-sm">
+                            <h5 class="alert-heading"><i class="bi bi-info-circle-fill text-primary me-2"></i>Structure
+                            </h5>
+                            <p class="mb-0">The MBA Programme is divided into three segments: <strong>Core
+                                    Courses</strong> (First Year), <strong>Summer Internship</strong> (8 weeks), and
+                                <strong>Elective Courses</strong> (Second Year). An academic year consists of three
+                                terms, each spanning 11 to 13 weeks.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <ul class="nav nav-tabs mb-4" id="curriculumTabs" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="year1-tab" data-bs-toggle="tab" data-bs-target="#year1"
+                            type="button" role="tab">First Year (Core)</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="year2-tab" data-bs-toggle="tab" data-bs-target="#year2"
+                            type="button" role="tab">Second Year (Electives)</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="credits-tab" data-bs-toggle="tab" data-bs-target="#credits"
+                            type="button" role="tab">Credit System</button>
+                    </li>
+                </ul>
+
+                <div class="tab-content" id="curriculumTabContent">
+
+                    <div class="tab-pane fade show active" id="year1" role="tabpanel">
+                        <div class="row g-4">
+                            <div class="col-md-4">
+                                <div class="card h-100 border-0 shadow-sm">
+                                    <div class="card-header bg-primary text-white fw-bold">Term 1</div>
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item">Management Accounting I</li>
+                                        <li class="list-group-item">Organizational Behaviour I</li>
+                                        <li class="list-group-item">Marketing Management I</li>
+                                        <li class="list-group-item">Microeconomics</li>
+                                        <li class="list-group-item">Statistics for Management</li>
+                                        <li class="list-group-item">Information Technology & Systems</li>
+                                        <li class="list-group-item">Business Communication</li>
+                                        <li class="list-group-item">Sustainable Development</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card h-100 border-0 shadow-sm">
+                                    <div class="card-header bg-primary text-white fw-bold">Term 2</div>
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item">Management Accounting II</li>
+                                        <li class="list-group-item">Financial Management I</li>
+                                        <li class="list-group-item">Organizational Behavior II</li>
+                                        <li class="list-group-item">Mindfulness at Workplace</li>
+                                        <li class="list-group-item">Marketing Management II</li>
+                                        <li class="list-group-item">Macroeconomics</li>
+                                        <li class="list-group-item">Operations Research</li>
+                                        <li class="list-group-item">Design Thinking</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card h-100 border-0 shadow-sm">
+                                    <div class="card-header bg-primary text-white fw-bold">Term 3</div>
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item">Financial Management II</li>
+                                        <li class="list-group-item">Human Resource Management</li>
+                                        <li class="list-group-item">Marketing Management III</li>
+                                        <li class="list-group-item">Operations Management</li>
+                                        <li class="list-group-item">Business Data Analytics</li>
+                                        <li class="list-group-item">Foreign Language</li>
+                                        <li class="list-group-item">Strategic Management</li>
+                                        <li class="list-group-item">Indian Legal System</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade" id="year2" role="tabpanel">
+                        <div class="accordion" id="electivesAccordion">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#marketing" aria-expanded="true">
+                                        Marketing
+                                    </button>
+                                </h2>
+                                <div id="marketing" class="accordion-collapse collapse show"
+                                    data-bs-parent="#electivesAccordion">
+                                    <div class="accordion-body">
+                                        Consumer Behaviour, Sales & Distribution Management, Brand Management, Product
+                                        Management, Integrated Marketing Communication, Digital Marketing, Marketing
+                                        Analytics, Pricing Strategies, B2B Marketing, Services Marketing, Luxury &
+                                        Fashion Management.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#finance">
+                                        Finance & Accounting
+                                    </button>
+                                </h2>
+                                <div id="finance" class="accordion-collapse collapse"
+                                    data-bs-parent="#electivesAccordion">
+                                    <div class="accordion-body">
+                                        Security Analysis & Portfolio Management, Financial Derivatives, Business
+                                        Analysis and Valuation, Financial Statement Analysis, Commercial Banking &
+                                        Credit Lending, Project Appraisal & Finance, Financial Risk Management, Fixed
+                                        Income Securities, Investment Banking, International Finance.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#ops">
+                                        Operations Management & Quantitative Techniques
+                                    </button>
+                                </h2>
+                                <div id="ops" class="accordion-collapse collapse" data-bs-parent="#electivesAccordion">
+                                    <div class="accordion-body">
+                                        Supply Chain Management, Total Quality Management & Lean Six Sigma, Service
+                                        Operations, Project Management, Logistics Management, Sustainable Product Design
+                                        & Development, Operation Strategy.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#it">
+                                        IT Systems & Analytics
+                                    </button>
+                                </h2>
+                                <div id="it" class="accordion-collapse collapse" data-bs-parent="#electivesAccordion">
+                                    <div class="accordion-body">
+                                        Data Science for Managers using Python, Digital Transformation through AI,
+                                        Storytelling with Data, Enterprise Resource Planning, Advance Business
+                                        Analytics, Business Intelligence and Data Modelling, Cloud Computing and IoT,
+                                        Big Data Analytics, Electronic Commerce.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#strategy">
+                                        Strategy & General Management
+                                    </button>
+                                </h2>
+                                <div id="strategy" class="accordion-collapse collapse"
+                                    data-bs-parent="#electivesAccordion">
+                                    <div class="accordion-body">
+                                        Decoding Business Models, Management Consulting, Mergers & Acquisitions &
+                                        Strategic Alliances, International Business, Strategy & Organizational
+                                        Leadership.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade" id="credits" role="tabpanel">
+                        <div class="table-responsive">
+                            <table class="course-table">
+                                <thead>
+                                    <tr>
+                                        <th>Course Credit</th>
+                                        <th>Credit Points</th>
+                                        <th>No of Sessions</th>
+                                        <th>Contact Hours</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Full</td>
+                                        <td>3</td>
+                                        <td>20</td>
+                                        <td>30</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Three-Fourth</td>
+                                        <td>2.25</td>
+                                        <td>15</td>
+                                        <td>22.5</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Half</td>
+                                        <td>1.5</td>
+                                        <td>10</td>
+                                        <td>15</td>
+                                    </tr>
+                                    <tr>
+                                        <td>One-third</td>
+                                        <td>1</td>
+                                        <td>7 (6+1)</td>
+                                        <td>10 (1.5*6+1)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <p class="mt-3 text-muted small">* Summer project is considered equivalent to 3-credit
+                                points.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-padding">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Fees & Financial Aid</h2>
+                </div>
+                <div class="row g-4 justify-content-center">
+                    <div class="col-md-8">
+                        <div class="card border-0 shadow-lg">
+                            <div class="card-body p-5">
+                                <h4 class="mb-3 text-primary-navy">Scholarships</h4>
+                                <p>The following Government of India scholarships are available to eligible MBA
+                                    students:</p>
+                                <ul class="list-group list-group-flush mb-4">
+                                    <li class="list-group-item"><i
+                                            class="bi bi-check-circle-fill text-success me-2"></i> Central Sector
+                                        Scholarship Scheme of Top Class Education for Scheduled Castes Students
+                                        (Ministry of Social Justice and Empowerment)</li>
+                                    <li class="list-group-item"><i
+                                            class="bi bi-check-circle-fill text-success me-2"></i> Central Sector
+                                        Scholarship Scheme of Top Class Education for Scheduled Tribes Students
+                                        (Ministry of Tribal Affairs)</li>
+                                    <li class="list-group-item"><i
+                                            class="bi bi-check-circle-fill text-success me-2"></i> Merit-cum means based
+                                        scholarship scheme for minority communities</li>
+                                    <li class="list-group-item"><i
+                                            class="bi bi-check-circle-fill text-success me-2"></i> Scheme of Scholarship
+                                        for Top Class Education for Students with Disabilities</li>
+                                </ul>
+
+                                <div class="d-grid gap-2 d-md-block">
+                                    <a href="https://iimbg.ac.in/wp-content/uploads/2025/05/IIM-BG-MBA-2025-27-ANNEXURE-2.pdf"
+                                        target="_blank" class="btn btn-primary rounded-pill px-4 me-2">
+                                        <i class="bi bi-file-earmark-pdf me-2"></i>Fee Structure (2025-27)
+                                    </a>
+
+                                    <a href="https://iimbg.ac.in/wp-content/uploads/2024/05/MBA_2024-26_Fee_detail.pdf"
+                                        target="_blank" class="btn btn-outline-primary rounded-pill px-4">
+                                        <i class="bi bi-file-earmark-pdf me-2"></i>Fee Structure (2024-26)
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <h5>About IIM Bodh Gaya</h5>
+                    <p>Indian Institute of Management Bodh Gaya is committed to creating socially responsible managers
+                        and emotionally mature, mindful leaders who can make meaningful contributions to society.</p>
+                    <div class="social-icons mt-4">
+                        <a href="#" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="bi bi-twitter-x"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+                        <a href="#" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+                    </div>
+                </div>
+
+                <div class="col-lg-2 col-md-6">
+                    <h5>Quick Links</h5>
+                    <ul>
+                        <li><a href="index.html#about">About Us</a></li>
+                        <li><a href="index.html#programs">Programs</a></li>
+                        <li><a href="index.html#placements">Placements</a></li>
+                        <li><a href="index.html#campus">Campus Life</a></li>
+                        <li><a href="index.html#contact">Contact Us</a></li>
+                        <li><a href="#">Careers</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <h5>Academic Programs</h5>
+                    <ul>
+                        <li><a href="index.html#programs">MBA / PGPM</a></li>
+                        <li><a href="index.html#programs">Integrated Programme (IPM)</a></li>
+                        <li><a href="index.html#programs">MBA - Healthcare Management</a></li>
+                        <li><a href="index.html#programs">Executive MBA (Online)</a></li>
+                        <li><a href="index.html#programs">Ph.D. Program</a></li>
+                        <li><a href="#">Faculty Development</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <h5>Important Links</h5>
+                    <ul>
+                        <li><a href="#">Board of Governors</a></li>
+                        <li><a href="#">Faculty Directory</a></li>
+                        <li><a href="#">Right to Information</a></li>
+                        <li><a href="#">Tenders & Notices</a></li>
+                        <li><a href="#">Anti-Ragging Policy</a></li>
+                        <li><a href="#">Student Clubs</a></li>
+                        <li><a href="#">Alumni Network</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="row">
+                    <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                        <p class="mb-0">&copy; 2025 IIM Bodh Gaya. All rights reserved.</p>
+                    </div>
+                    <div class="col-md-6 text-center text-md-end">
+                        <p class="mb-0">
+                            <a href="#" style="margin-right: 15px;">Privacy Policy</a>
+                            <a href="#" style="margin-right: 15px;">Terms of Use</a>
+                            <a href="#">Sitemap</a>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="row mt-4">
+                    <div class="col-12 text-center" style="font-size: 0.9rem; opacity: 0.8;">
+                        <p class="mb-1"><strong>Director:</strong> Dr. Vinita S. Sahay</p>
+                        <p class="mb-0"><strong>Mentor Institution:</strong> IIM Calcutta</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const toggleBtn = document.getElementById('theme-toggle');
+            const icon = toggleBtn.querySelector('i');
+            const html = document.documentElement;
+
+            // Check for saved user preference
+            const savedTheme = localStorage.getItem('theme');
+
+            if (savedTheme === 'dark') {
+                html.setAttribute('data-theme', 'dark');
+                icon.classList.remove('bi-moon-fill');
+                icon.classList.add('bi-sun-fill');
+            }
+
+            // Handle Click Event
+            toggleBtn.addEventListener('click', () => {
+                const currentTheme = html.getAttribute('data-theme');
+
+                if (currentTheme === 'dark') {
+                    // Switch to Light
+                    html.removeAttribute('data-theme');
+                    localStorage.setItem('theme', 'light');
+                    icon.classList.remove('bi-sun-fill');
+                    icon.classList.add('bi-moon-fill');
+                } else {
+                    // Switch to Dark
+                    html.setAttribute('data-theme', 'dark');
+                    localStorage.setItem('theme', 'dark');
+                    icon.classList.remove('bi-moon-fill');
+                    icon.classList.add('bi-sun-fill');
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MBA - Hospital & Healthcare Management — IIM Bodh Gaya</title>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.1/font/bootstrap-icons.min.css">
+
+    <style>
+        /* ===== ROOT VARIABLES - Colors & Theming ===== */
+        :root {
+            /* Base Palette */
+            --primary-navy: #1e3a8a;
+            --secondary-blue: #3b82f6;
+            --accent-blue: #0ea5e9;
+            --light-gray: #f8fafc;
+            --dark-text: #1e293b;
+            --white: #ffffff;
+
+            /* SEMANTIC THEME VARIABLES (Default Light) */
+            --bg-body: #ffffff;
+            --bg-nav: #ffffff;
+            --bg-section-alt: #f8fafc;
+            --bg-card: #ffffff;
+            --bg-glass: rgba(255, 255, 255, 0.1);
+            /* Glassmorphism light */
+            --bg-sidebar-link: #f8fafc;
+
+            --text-main: #1e293b;
+            --text-heading: #1e3a8a;
+            --text-nav: #1e3a8a;
+            --text-muted: #6c757d;
+
+            --border-color: #e2e8f0;
+            --shadow-subtle: rgba(0, 0, 0, 0.05);
+            --shadow-hover: rgba(0, 0, 0, 0.1);
+
+            --logo-bg: transparent;
+
+            /* Footer Background - Default Blue Gradient */
+            --bg-footer: linear-gradient(135deg, #1e3a8a 0%, #0f172a 100%);
+        }
+
+        /* DARK MODE OVERRIDES */
+        [data-theme="dark"] {
+            --bg-body: #121212;
+            --bg-nav: #1e1e1e;
+            --bg-section-alt: #1e1e1e;
+            /* Darker section */
+            --bg-card: #262626;
+            --bg-glass: rgba(0, 0, 0, 0.4);
+            /* Darker glass for contrast */
+            --bg-sidebar-link: #262626;
+
+            --text-main: #e0e0e0;
+            --text-heading: #60a5fa;
+            /* Lighter Blue for visibility */
+            --text-nav: #e0e0e0;
+            --text-muted: #a0a0a0;
+
+            --border-color: rgba(255, 255, 255, 0.1);
+            --shadow-subtle: rgba(0, 0, 0, 0.5);
+            --shadow-hover: rgba(0, 0, 0, 0.7);
+
+            --logo-bg: rgba(255, 255, 255, 0.9);
+
+            /* Footer Background - Dark Mode Black Gradient */
+            --bg-footer: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+        }
+
+        /* ===== GLOBAL STYLES ===== */
+        body {
+            font-family: 'Open Sans', sans-serif;
+            color: var(--text-main);
+            background-color: var(--bg-body);
+            line-height: 1.6;
+            overflow-x: hidden;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: 'Open Sans', sans-serif;
+            font-weight: 700;
+            color: var(--text-heading);
+            transition: color 0.3s ease;
+        }
+
+        /* ===== NAVIGATION ===== */
+        .navbar {
+            background-color: var(--bg-nav);
+            padding: 0.5rem 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border-bottom: 3px solid var(--secondary-blue);
+            transition: background-color 0.3s ease;
+        }
+
+        .site-logo {
+            max-height: 110px;
+            height: auto;
+            width: auto;
+            display: inline-block;
+            vertical-align: middle;
+            margin: -15px 0.5rem -15px 0;
+            background: var(--logo-bg);
+            border-radius: 8px;
+            padding: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .navbar-brand,
+        .navbar-brand img {
+            border: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+
+        .nav-link {
+            color: var(--text-nav) !important;
+            font-weight: 500;
+            margin: 0 0.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--secondary-blue) !important;
+        }
+
+        /* Dropdowns */
+        .dropdown-menu {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+        }
+
+        .dropdown-item {
+            color: var(--text-main);
+            transition: background-color 0.3s ease;
+        }
+
+        .dropdown-item:hover {
+            background-color: var(--bg-body);
+            color: var(--secondary-blue);
+        }
+
+        /* Dark Mode Toggle Button */
+        .theme-toggle-btn {
+            background: none;
+            border: none;
+            color: var(--text-nav);
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 8px;
+            margin-left: 10px;
+            transition: color 0.3s ease;
+        }
+
+        .theme-toggle-btn:hover {
+            color: var(--secondary-blue);
+        }
+
+        /* ===== EXPERIMENTAL HERO SECTION ===== */
+        .hero-split {
+            background: linear-gradient(135deg, var(--primary-navy) 0%, #0f172a 100%);
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            color: white;
+        }
+
+        /* Decorative Background Circle */
+        .hero-circle {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            background: rgba(59, 130, 246, 0.1);
+            top: -100px;
+            right: -100px;
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .display-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.3;
+            margin-bottom: 1.5rem;
+            padding-bottom: 15px;
+            background: -webkit-linear-gradient(0deg, #fff, #93c5fd);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 2rem;
+            border-radius: 20px;
+            color: white;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--accent-blue);
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.8;
+        }
+
+        /* ===== STICKY SIDEBAR LAYOUT ===== */
+        .sticky-sidebar {
+            position: sticky;
+            top: 100px;
+            z-index: 10;
+        }
+
+        .nav-pills .nav-link {
+            color: var(--text-main);
+            text-align: left;
+            padding: 15px 20px;
+            margin-bottom: 10px;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            background: var(--bg-sidebar-link);
+            font-weight: 600;
+        }
+
+        .nav-pills .nav-link.active {
+            background-color: var(--primary-navy);
+            color: white;
+            box-shadow: 0 5px 15px var(--shadow-hover);
+            transform: translateX(10px);
+        }
+
+        .curriculum-card {
+            background: var(--bg-card);
+            border: none;
+            border-left: 4px solid var(--secondary-blue);
+            box-shadow: 0 5px 20px var(--shadow-subtle);
+            margin-bottom: 30px;
+            border-radius: 0 10px 10px 0;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+
+        .curriculum-card:hover {
+            transform: translateY(-5px);
+        }
+
+        /* ===== GLASSMORPHISM ADVISORY ===== */
+        .glass-section {
+            background: url('https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&q=80&w=2070') no-repeat center center/cover;
+            position: relative;
+            padding: 100px 0;
+        }
+
+        .glass-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(30, 58, 138, 0.9);
+        }
+
+        .glass-card {
+            background: var(--bg-glass);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            padding: 25px;
+            color: white;
+            transition: transform 0.3s ease;
+            height: 100%;
+        }
+
+        .glass-card:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.05);
+        }
+
+        .section-title h2 {
+            position: relative;
+            display: inline-block;
+            padding-bottom: 15px;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: var(--secondary-blue);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--bg-footer);
+            color: white;
+            padding: 50px 0 20px;
+            transition: background 0.3s ease;
+        }
+
+        .footer h5 {
+            color: var(--accent-blue);
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+        }
+
+        .footer a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer a:hover {
+            color: var(--accent-blue);
+        }
+
+        .footer ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .social-icons a {
+            color: white;
+            font-size: 1.5rem;
+            margin-right: 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            color: var(--accent-blue);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 3rem;
+            padding-top: 2rem;
+        }
+
+        /* Helper Classes */
+        .bg-light-alt {
+            background-color: var(--bg-section-alt) !important;
+            transition: background-color 0.3s ease;
+        }
+
+        .text-muted {
+            color: var(--text-muted) !important;
+        }
+
+        /* Ensure specific text elements adapt */
+        .text-dark {
+            color: var(--text-main) !important;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top">
+        <div class="container-fluid px-5">
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+                <img src="assets/logos/IIMBG TRANSPARENT.png" alt="IIM Bodh Gaya" class="site-logo me-2">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="faculty.html">Faculty</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle active" href="#" role="button"
+                            data-bs-toggle="dropdown">Programs</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#programs">All Programs</a></li>
+                            <li><a class="dropdown-item" href="mba.html">MBA/PGPM</a></li>
+                            <li><a class="dropdown-item" href="dbm.html">MBA-DBM</a></li>
+                            <li><a class="dropdown-item" href="hhm.html">MBA-HHM</a></li>
+                            <li><a class="dropdown-item" href="ipm.html">IPM</a></li>
+                            <li><a class="dropdown-item" href="emba.html">Executive MBA</a></li>
+                            <li><a class="dropdown-item" href="phd.html">PhD</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="placements.html">Placements</a></li>
+                    <li class="nav-item"><a class="nav-link" href="campuslife.html">Campus Life</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+
+                    <li class="nav-item ms-2">
+                        <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle Dark Mode">
+                            <i class="bi bi-moon-fill"></i>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <section class="hero-split">
+            <div class="hero-circle"></div>
+            <div class="container hero-content">
+                <div class="row align-items-center">
+                    <div class="col-lg-7">
+                        <span class="badge bg-info text-dark mb-3 px-3 py-2 rounded-pill">New Age Program</span>
+                        <h1 class="display-title">MBA in Hospital &<br>Healthcare Management</h1>
+                        <p class="lead mb-5 text-white-50">Bridging the gap between medical expertise and managerial
+                            excellence.</p>
+                        <a href="#overview" class="btn btn-light rounded-pill px-5 py-3 fw-bold text-primary">Explore
+                            Program</a>
+                    </div>
+                    <div class="col-lg-5">
+                        <div class="row g-3">
+                            <div class="col-6">
+                                <div class="stat-card">
+                                    <div class="stat-number">108</div>
+                                    <div class="stat-label">Total Credits</div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="stat-card">
+                                    <div class="stat-number">4</div>
+                                    <div class="stat-label">Months Immersion</div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="stat-card mt-2">
+                                    <div class="d-flex align-items-center">
+                                        <i class="bi bi-hospital fs-1 me-3 text-info"></i>
+                                        <div>
+                                            <div class="fs-5 fw-bold">Dual Specialization</div>
+                                            <div class="small opacity-75">Hospital Management & Healthcare Management
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="overview" class="py-5" style="background-color: var(--bg-body);">
+            <div class="container py-5">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <h2 class="display-6 fw-bold mb-4">Program<br>Highlights</h2>
+                        <p class="text-muted">A two-year full-time residential program designed to create future leaders
+                            for the healthcare industry.</p>
+                    </div>
+                    <div class="col-lg-8">
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <div class="d-flex">
+                                    <div class="flex-shrink-0">
+                                        <div class="bg-primary text-white rounded-circle p-3"><i
+                                                class="bi bi-heart-pulse fs-4"></i></div>
+                                    </div>
+                                    <div class="ms-4">
+                                        <h5>Healthcare Focus</h5>
+                                        <p class="small text-muted">Specialized tracks in Hospital Management and
+                                            Healthcare Management (Public Health, Insurance, Pharma).</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="d-flex">
+                                    <div class="flex-shrink-0">
+                                        <div class="bg-info text-white rounded-circle p-3"><i
+                                                class="bi bi-briefcase fs-4"></i></div>
+                                    </div>
+                                    <div class="ms-4">
+                                        <h5>Industry Immersion</h5>
+                                        <p class="small text-muted">4-month extended industry immersion to work on live
+                                            projects in hospitals or pharma companies.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="d-flex">
+                                    <div class="flex-shrink-0">
+                                        <div class="bg-success text-white rounded-circle p-3"><i
+                                                class="bi bi-people fs-4"></i></div>
+                                    </div>
+                                    <div class="ms-4">
+                                        <h5>Community Project</h5>
+                                        <p class="small text-muted">Field study in semi-urban/rural areas to understand
+                                            public health issues and government schemes.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="d-flex">
+                                    <div class="flex-shrink-0">
+                                        <div class="bg-warning text-white rounded-circle p-3"><i
+                                                class="bi bi-lightbulb fs-4"></i></div>
+                                    </div>
+                                    <div class="ms-4">
+                                        <h5>General Electives</h5>
+                                        <p class="small text-muted">Flexibility to choose electives from HR, Marketing,
+                                            Finance, IT, and Operations domains.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-5 bg-light-alt">
+            <div class="container py-5">
+                <div class="row">
+                    <div class="col-lg-3 mb-4 mb-lg-0">
+                        <div class="sticky-sidebar">
+                            <h4 class="mb-4 ps-2">Curriculum Map</h4>
+                            <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist"
+                                aria-orientation="vertical">
+                                <button class="nav-link active" id="v-pills-term1-tab" data-bs-toggle="pill"
+                                    data-bs-target="#v-pills-term1" type="button" role="tab"
+                                    aria-controls="v-pills-term1" aria-selected="true">Year 1: Foundations</button>
+                                <button class="nav-link" id="v-pills-term2-tab" data-bs-toggle="pill"
+                                    data-bs-target="#v-pills-term2" type="button" role="tab"
+                                    aria-controls="v-pills-term2" aria-selected="false">Year 1: Advanced</button>
+                                <button class="nav-link" id="v-pills-immersion-tab" data-bs-toggle="pill"
+                                    data-bs-target="#v-pills-immersion" type="button" role="tab"
+                                    aria-controls="v-pills-immersion" aria-selected="false">Industry Immersion</button>
+                                <button class="nav-link" id="v-pills-hospital-tab" data-bs-toggle="pill"
+                                    data-bs-target="#v-pills-hospital" type="button" role="tab"
+                                    aria-controls="v-pills-hospital" aria-selected="false">Track: Hospital Mgmt</button>
+                                <button class="nav-link" id="v-pills-healthcare-tab" data-bs-toggle="pill"
+                                    data-bs-target="#v-pills-healthcare" type="button" role="tab"
+                                    aria-controls="v-pills-healthcare" aria-selected="false">Track: Healthcare
+                                    Mgmt</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-9">
+                        <div class="tab-content h-100" id="v-pills-tabContent">
+
+                            <div class="tab-pane fade show active h-100" id="v-pills-term1" role="tabpanel"
+                                aria-labelledby="v-pills-term1-tab">
+                                <div class="h-100 pt-3">
+                                    <h3 class="mb-4">Year 1: Foundations (Term I & II)</h3>
+                                    <div class="curriculum-card p-4 h-100 d-flex flex-column justify-content-center">
+                                        <div class="row h-100">
+                                            <div class="col-md-6 d-flex flex-column">
+                                                <h6 class="text-uppercase text-muted mb-3 border-bottom pb-2">Term I
+                                                    Highlights</h6>
+                                                <ul class="list-unstyled flex-grow-1">
+                                                    <li class="mb-3"><i
+                                                            class="bi bi-check2-circle text-primary me-2"></i>OB in
+                                                        Healthcare</li>
+                                                    <li class="mb-3"><i
+                                                            class="bi bi-check2-circle text-primary me-2"></i>Healthcare
+                                                        Delivery Systems</li>
+                                                    <li class="mb-3"><i
+                                                            class="bi bi-check2-circle text-primary me-2"></i>Marketing
+                                                        for Healthcare</li>
+                                                    <li class="mb-3"><i
+                                                            class="bi bi-check2-circle text-primary me-2"></i>Medical
+                                                        Devices Business</li>
+                                                </ul>
+                                            </div>
+                                            <div class="col-md-6 border-start d-flex flex-column">
+                                                <h6 class="text-uppercase text-muted mb-3 border-bottom pb-2">Term II
+                                                    Highlights</h6>
+                                                <ul class="list-unstyled flex-grow-1">
+                                                    <li class="mb-3"><i
+                                                            class="bi bi-check2-circle text-primary me-2"></i>Healthcare
+                                                        Quality Mgmt</li>
+                                                    <li class="mb-3"><i
+                                                            class="bi bi-check2-circle text-primary me-2"></i>Patient-Centric
+                                                        Delivery</li>
+                                                    <li class="mb-3"><i
+                                                            class="bi bi-check2-circle text-primary me-2"></i>Health
+                                                        Economics</li>
+                                                    <li class="mb-3"><i
+                                                            class="bi bi-check2-circle text-primary me-2"></i>Epidemiology
+                                                        & Biostatistics</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="tab-pane fade h-100" id="v-pills-term2" role="tabpanel"
+                                aria-labelledby="v-pills-term2-tab">
+                                <div class="h-100 pt-3">
+                                    <h3 class="mb-4">Year 1: Advanced (Term III)</h3>
+                                    <div class="curriculum-card p-5 h-100 d-flex align-items-center">
+                                        <div class="row w-100 align-items-center">
+                                            <div class="col-md-8">
+                                                <h5 class="mb-4 text-muted">Key Focus Areas</h5>
+                                                <div class="d-flex flex-wrap gap-3">
+                                                    <span class="badge bg-light text-dark border p-3 fs-6">Digital
+                                                        Transformation</span>
+                                                    <span class="badge bg-light text-dark border p-3 fs-6">Strategic
+                                                        Mgmt</span>
+                                                    <span class="badge bg-light text-dark border p-3 fs-6">Medical
+                                                        Ethics</span>
+                                                    <span class="badge bg-light text-dark border p-3 fs-6">Health
+                                                        Insurance Dynamics</span>
+                                                    <span
+                                                        class="badge bg-light text-dark border p-3 fs-6">Entrepreneurship</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 text-center border-start ps-4">
+                                                <div class="display-1 fw-bold text-primary mb-0">9</div>
+                                                <div class="text-muted fw-bold text-uppercase letter-spacing-1">Core
+                                                    Modules</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="tab-pane fade h-100" id="v-pills-immersion" role="tabpanel"
+                                aria-labelledby="v-pills-immersion-tab">
+                                <div class="h-100 pt-3">
+                                    <div
+                                        class="bg-primary text-white p-5 rounded-3 position-relative overflow-hidden h-100 d-flex align-items-center">
+                                        <div class="position-relative z-2 w-75">
+                                            <span class="badge bg-white text-primary mb-3 px-3 py-2">Experiential
+                                                Learning</span>
+                                            <h2 class="display-5 fw-bold mb-4">Industry Immersion (4 Months)</h2>
+                                            <p class="lead mb-4 opacity-90">Participants engage in an organization
+                                                operating in the healthcare space (Hospital, Pharma, Insurance, IT,
+                                                Consulting) to work on assigned projects and develop a detailed report.
+                                            </p>
+                                            <div class="d-flex gap-3">
+                                                <div class="border border-white border-opacity-25 rounded p-3 text-center"
+                                                    style="min-width: 100px;">
+                                                    <div class="fw-bold fs-4">16</div>
+                                                    <div class="small opacity-75">Weeks</div>
+                                                </div>
+                                                <div class="border border-white border-opacity-25 rounded p-3 text-center"
+                                                    style="min-width: 100px;">
+                                                    <div class="fw-bold fs-4">1</div>
+                                                    <div class="small opacity-75">Live Project</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <i class="bi bi-buildings position-absolute bottom-0 end-0 text-white-50"
+                                            style="font-size: 15rem; margin-right: -40px; margin-bottom: -40px; transform: rotate(-10deg);"></i>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="tab-pane fade h-100" id="v-pills-hospital" role="tabpanel"
+                                aria-labelledby="v-pills-hospital-tab">
+                                <div class="h-100 pt-3">
+                                    <div
+                                        class="curriculum-card h-100 p-5 border-start-0 border-top border-primary border-4 d-flex flex-column">
+                                        <div class="mb-4">
+                                            <span class="badge bg-primary-subtle text-primary mb-2">Specialization Track
+                                                1</span>
+                                            <h3 class="mb-3 text-primary">Hospital Management</h3>
+                                            <p class="text-muted lead">Focuses on the administrative and operational
+                                                aspects of running large-scale medical facilities.</p>
+                                        </div>
+                                        <div class="row g-4 mt-auto">
+                                            <div class="col-md-6">
+                                                <ul class="list-group list-group-flush">
+                                                    <li class="list-group-item border-0 ps-0 py-3"><i
+                                                            class="bi bi-arrow-right-circle-fill text-primary me-3"></i>Hospital
+                                                        Planning & Design</li>
+                                                    <li class="list-group-item border-0 ps-0 py-3"><i
+                                                            class="bi bi-arrow-right-circle-fill text-primary me-3"></i>Clinical
+                                                        Services Admin</li>
+                                                    <li class="list-group-item border-0 ps-0 py-3"><i
+                                                            class="bi bi-arrow-right-circle-fill text-primary me-3"></i>Patient
+                                                        Care & Safety</li>
+                                                </ul>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <ul class="list-group list-group-flush">
+                                                    <li class="list-group-item border-0 ps-0 py-3"><i
+                                                            class="bi bi-arrow-right-circle-fill text-primary me-3"></i>Electronic
+                                                        Medical Records</li>
+                                                    <li class="list-group-item border-0 ps-0 py-3"><i
+                                                            class="bi bi-arrow-right-circle-fill text-primary me-3"></i>Hospital
+                                                        Waste Management</li>
+                                                    <li class="list-group-item border-0 ps-0 py-3"><i
+                                                            class="bi bi-arrow-right-circle-fill text-primary me-3"></i>Accreditations
+                                                        (NABH/JCI)</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="tab-pane fade h-100" id="v-pills-healthcare" role="tabpanel"
+                                aria-labelledby="v-pills-healthcare-tab">
+                                <div class="h-100 pt-3">
+                                    <div
+                                        class="curriculum-card h-100 p-5 border-start-0 border-top border-info border-4 d-flex flex-column">
+                                        <div class="mb-4">
+                                            <span class="badge bg-info-subtle text-info-emphasis mb-2">Specialization
+                                                Track 2</span>
+                                            <h3 class="mb-3 text-info-emphasis">Healthcare Management</h3>
+                                            <p class="text-muted lead">Focuses on the broader ecosystem including public
+                                                health, policy, insurance, and pharmaceuticals.</p>
+                                        </div>
+                                        <div class="row g-4 mt-auto">
+                                            <div class="col-md-6">
+                                                <ul class="list-group list-group-flush">
+                                                    <li class="list-group-item border-0 ps-0 py-3"><i
+                                                            class="bi bi-arrow-right-circle-fill text-info me-3"></i>Public
+                                                        Health Disaster & Risk Mgmt</li>
+                                                    <li class="list-group-item border-0 ps-0 py-3"><i
+                                                            class="bi bi-arrow-right-circle-fill text-info me-3"></i>Healthcare
+                                                        Financing</li>
+                                                    <li class="list-group-item border-0 ps-0 py-3"><i
+                                                            class="bi bi-arrow-right-circle-fill text-info me-3"></i>Health
+                                                        Analytics</li>
+                                                </ul>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <ul class="list-group list-group-flush">
+                                                    <li class="list-group-item border-0 ps-0 py-3"><i
+                                                            class="bi bi-arrow-right-circle-fill text-info me-3"></i>Medical
+                                                        Tourism</li>
+                                                    <li class="list-group-item border-0 ps-0 py-3"><i
+                                                            class="bi bi-arrow-right-circle-fill text-info me-3"></i>Pharma
+                                                        Supply Chain</li>
+                                                    <li class="list-group-item border-0 ps-0 py-3"><i
+                                                            class="bi bi-arrow-right-circle-fill text-info me-3"></i>Economics
+                                                        of Aging</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="glass-section">
+            <div class="glass-overlay"></div>
+            <div class="container position-relative z-2">
+                <div class="text-center mb-5 text-white">
+                    <h2 style="color: white !important;">Industry Advisory Board</h2>
+                    <p class="opacity-75">Leaders guiding our vision</p>
+                </div>
+
+                <div class="row g-4">
+                    <div class="col-md-4 col-lg-3">
+                        <div class="glass-card text-center">
+                            <div class="fw-bold fs-5">Dr. Sathya Sriram</div>
+                            <div class="small opacity-75 mt-1">CEO – Preventive Health<br>Apollo Hospitals</div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-lg-3">
+                        <div class="glass-card text-center">
+                            <div class="fw-bold fs-5">Col. H.S. Parmar</div>
+                            <div class="small opacity-75 mt-1">Co-founder<br>AyushPay</div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-lg-3">
+                        <div class="glass-card text-center">
+                            <div class="fw-bold fs-5">Rohit Gulati</div>
+                            <div class="small opacity-75 mt-1">Director Marketing<br>Johnson & Johnson Vision</div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-lg-3">
+                        <div class="glass-card text-center">
+                            <div class="fw-bold fs-5">Neeraj Lal</div>
+                            <div class="small opacity-75 mt-1">Regional Director<br>Medicover</div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-lg-3">
+                        <div class="glass-card text-center">
+                            <div class="fw-bold fs-5">Vivek Jha</div>
+                            <div class="small opacity-75 mt-1">Head Strategy<br>Novartis</div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-lg-3">
+                        <div class="glass-card text-center">
+                            <div class="fw-bold fs-5">Ashish Bansal</div>
+                            <div class="small opacity-75 mt-1">MD & Co-Lead<br>Alvarez & Marshal</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-5 text-center" style="background-color: var(--bg-body);">
+            <div class="container">
+                <h3 class="mb-4">Ready to lead the Healthcare Revolution?</h3>
+                <div class="d-flex justify-content-center gap-3">
+                    <button class="btn btn-outline-primary rounded-pill px-4">Fee Structure (2025-27)</button>
+                    <button class="btn btn-primary rounded-pill px-4">Download Brochure</button>
+                </div>
+                <div class="mt-4 small text-muted">
+                    <i class="bi bi-envelope me-2"></i> queries_hhm@iimbg.ac.in
+                    <span class="mx-2">|</span>
+                    <i class="bi bi-telephone me-2"></i> 9279296354
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <h5>About IIM Bodh Gaya</h5>
+                    <p>Indian Institute of Management Bodh Gaya is committed to creating socially responsible managers
+                        and emotionally mature, mindful leaders.</p>
+                    <div class="social-icons mt-4">
+                        <a href="https://www.facebook.com/iimbodhgaya" target="_blank" rel="noopener"><i
+                                class="bi bi-facebook"></i></a>
+                        <a href="https://x.com/iimbodhgaya" target="_blank" rel="noopener"><i
+                                class="bi bi-twitter-x"></i></a>
+                        <a href="https://www.linkedin.com/school/iimbg/" target="_blank" rel="noopener"><i
+                                class="bi bi-linkedin"></i></a>
+                        <a href="https://www.instagram.com/iimbodhgaya/" target="_blank" rel="noopener"><i
+                                class="bi bi-instagram"></i></a>
+                        <a href="https://www.youtube.com/@MediaPRCellIIMBodhGaya" target="_blank" rel="noopener"><i
+                                class="bi bi-youtube"></i></a>
+                    </div>
+                </div>
+
+                <div class="col-lg-2 col-md-6">
+                    <h5>Quick Links</h5>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin-bottom: 0.5rem;"><a href="about.html">About Us</a></li>
+                        <li style="margin-bottom: 0.5rem;"><a href="placements.html">Placements</a></li>
+                        <li style="margin-bottom: 0.5rem;"><a href="campus_life.html">Campus Life</a></li>
+                        <li style="margin-bottom: 0.5rem;"><a href="#">Contact Us</a></li>
+                        <li style="margin-bottom: 0.5rem;"><a href="#">Careers</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <h5>Academic Programs</h5>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin-bottom: 0.5rem;"><a href="mba.html">MBA / PGPM</a></li>
+                        <li style="margin-bottom: 0.5rem;"><a href="dbm.html">MBA (Digital Business)</a></li>
+                        <li style="margin-bottom: 0.5rem;"><a href="hhm.html">MBA (Healthcare)</a></li>
+                        <li style="margin-bottom: 0.5rem;"><a href="#">Executive MBA (Online)</a></li>
+                        <li style="margin-bottom: 0.5rem;"><a href="#">Ph.D. Program</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <h5>Important Links</h5>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin-bottom: 0.5rem;"><a href="#">Board of Governors</a></li>
+                        <li style="margin-bottom: 0.5rem;"><a href="#">Faculty Directory</a></li>
+                        <li style="margin-bottom: 0.5rem;"><a href="#">Right to Information</a></li>
+                        <li style="margin-bottom: 0.5rem;"><a href="#">Tenders & Notices</a></li>
+                        <li style="margin-bottom: 0.5rem;"><a href="#">Student Clubs</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="row">
+                    <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                        <p class="mb-0">&copy; 2025 IIM Bodh Gaya. All rights reserved.</p>
+                    </div>
+                    <div class="col-md-6 text-center text-md-end">
+                        <p class="mb-0">
+                            <a href="#" style="margin-right: 15px;">Privacy Policy</a>
+                            <a href="#" style="margin-right: 15px;">Terms of Use</a>
+                            <a href="#">Sitemap</a>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="row mt-4">
+                    <div class="col-12 text-center" style="font-size: 0.9rem; opacity: 0.8;">
+                        <p class="mb-1"><strong>Director:</strong> Dr. Vinita S. Sahay</p>
+                        <p class="mb-0"><strong>Mentor Institution:</strong> IIM Calcutta</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const toggleBtn = document.getElementById('theme-toggle');
+            const icon = toggleBtn.querySelector('i');
+            const html = document.documentElement;
+
+            // Check for saved user preference
+            const savedTheme = localStorage.getItem('theme');
+
+            if (savedTheme === 'dark') {
+                html.setAttribute('data-theme', 'dark');
+                icon.classList.remove('bi-moon-fill');
+                icon.classList.add('bi-sun-fill');
+            }
+
+            // Handle Click Event
+            toggleBtn.addEventListener('click', () => {
+                const currentTheme = html.getAttribute('data-theme');
+
+                if (currentTheme === 'dark') {
+                    // Switch to Light
+                    html.removeAttribute('data-theme');
+                    localStorage.setItem('theme', 'light');
+                    icon.classList.remove('bi-sun-fill');
+                    icon.classList.add('bi-moon-fill');
+                } else {
+                    // Switch to Dark
+                    html.setAttribute('data-theme', 'dark');
+                    localStorage.setItem('theme', 'dark');
+                    icon.classList.remove('bi-moon-fill');
+                    icon.classList.add('bi-sun-fill');
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About — IIM Bodh Gaya</title>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.1/font/bootstrap-icons.min.css">
+
+    <style>
+        /* ===== ROOT VARIABLES - Color Palette & Theming ===== */
+        :root {
+            /* Base Palette */
+            --primary-navy: #1e3a8a;
+            --secondary-blue: #3b82f6;
+            --accent-blue: #0ea5e9;
+            --light-gray: #f8fafc;
+            --dark-text: #1e293b;
+            --white: #ffffff;
+
+            /* SEMANTIC THEME VARIABLES (Default Light) */
+            --bg-body: #ffffff;
+            --bg-nav: #ffffff;
+            --bg-card: #ffffff;
+            --bg-section-alt: #f8fafc;
+            /* Light Gray */
+
+            /* Footer Background - Default Blue Gradient */
+            --bg-footer: linear-gradient(135deg, #1e3a8a 0%, #0f172a 100%);
+
+            --text-main: #1e293b;
+            --text-heading: #1e3a8a;
+            --text-nav: #1e3a8a;
+
+            --border-color: rgba(0, 0, 0, 0.1);
+            --shadow-color: rgba(30, 58, 138, 0.06);
+
+            --logo-bg: transparent;
+        }
+
+        /* DARK MODE OVERRIDES */
+        [data-theme="dark"] {
+            --bg-body: #121212;
+            --bg-nav: #1e1e1e;
+            --bg-card: #1e1e1e;
+            --bg-section-alt: #262626;
+            /* Dark Gray */
+
+            /* Footer Background - Dark Mode Black Gradient */
+            --bg-footer: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+
+            --text-main: #e0e0e0;
+            --text-heading: #60a5fa;
+            /* Lighter Blue for visibility */
+            --text-nav: #e0e0e0;
+
+            --border-color: rgba(255, 255, 255, 0.1);
+            --shadow-color: rgba(0, 0, 0, 0.5);
+
+            --logo-bg: rgba(255, 255, 255, 0.9);
+        }
+
+        /* ===== GLOBAL STYLES ===== */
+        html {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+            color: var(--text-main);
+            background-color: var(--bg-body);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+            font-weight: 700;
+            color: var(--text-heading);
+            transition: color 0.3s ease;
+        }
+
+        /* Raised shadow for all headings site-wide */
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            text-shadow: 0 6px 12px rgba(0, 0, 0, 0.25), 0 2px 4px rgba(0, 0, 0, 0.12);
+        }
+
+        /* ===== NAVIGATION BAR ===== */
+        .navbar {
+            background-color: var(--bg-nav);
+            padding: 0.5rem 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border-bottom: 3px solid var(--secondary-blue);
+            transition: background-color 0.3s ease;
+        }
+
+        .navbar-brand {
+            font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-heading) !important;
+        }
+
+        /* Logo image styling */
+        .site-logo {
+            max-height: 110px;
+            height: auto;
+            width: auto;
+            display: inline-block;
+            vertical-align: middle;
+            background: var(--logo-bg);
+            /* Adapts to dark mode */
+            border-radius: 8px;
+            padding: 5px;
+            margin: -15px 0.5rem -15px 0;
+            transition: background-color 0.3s ease;
+        }
+
+        .navbar-nav .nav-link {
+            color: var(--text-nav) !important;
+            margin: 0 0.5rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: var(--secondary-blue) !important;
+        }
+
+        /* Dark Mode Toggle Button */
+        .theme-toggle-btn {
+            background: none;
+            border: none;
+            color: var(--text-nav);
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 8px;
+            margin-left: 10px;
+            transition: color 0.3s ease;
+        }
+
+        .theme-toggle-btn:hover {
+            color: var(--secondary-blue);
+        }
+
+        .section-padding {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .section-title h2 {
+            font-size: 2.25rem;
+            color: var(--text-heading);
+        }
+
+        .content-card {
+            background: var(--bg-card);
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 3px 15px var(--shadow-color);
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .core-values li {
+            margin-bottom: 0.75rem;
+        }
+
+        /* ===== HERO SECTION ===== */
+        .hero-section {
+            background: linear-gradient(135deg, var(--primary-navy) 0%, var(--secondary-blue) 100%);
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .hero-section h1 {
+            color: white;
+            /* Always white in hero */
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero-section p {
+            font-size: 1.25rem;
+            color: rgba(255, 255, 255, 0.95);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* ===== HIGHLIGHTS SECTION ===== */
+        .highlights-section {
+            background-color: var(--bg-section-alt);
+            padding: 60px 0;
+            transition: background-color 0.3s ease;
+        }
+
+        .highlight-item {
+            text-align: center;
+            padding: 30px;
+        }
+
+        .highlight-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--secondary-blue);
+        }
+
+        .highlight-label {
+            font-size: 0.95rem;
+            color: var(--text-main);
+            margin-top: 10px;
+        }
+
+        /* ===== MULTI-COLUMN SECTIONS ===== */
+        .section-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .grid-item h3 {
+            margin-top: 0;
+            margin-bottom: 1.5rem;
+            color: var(--text-heading);
+        }
+
+        /* ===== CALL-TO-ACTION ===== */
+        .cta-section {
+            background-color: var(--accent-blue);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .cta-section h2 {
+            color: white;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: white;
+            color: var(--accent-blue);
+            padding: 12px 40px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 1.5rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            color: var(--accent-blue);
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            /* Now uses a variable so it can switch between Blue and Black */
+            background: var(--bg-footer);
+            color: white;
+            padding: 40px 0 20px;
+            transition: background 0.3s ease;
+        }
+
+        .footer h5 {
+            color: var(--accent-blue);
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+        }
+
+        .footer a {
+            color: white;
+            /* Forced white to match original design */
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer a:hover {
+            color: var(--accent-blue);
+        }
+
+        .footer ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .social-icons a {
+            color: white;
+            font-size: 1.5rem;
+            margin-right: 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            color: var(--accent-blue);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 3rem;
+            padding-top: 2rem;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top">
+        <div class="container-fluid px-5">
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+                <img src="assets/logos/IIMBG TRANSPARENT.png" alt="IIM Bodh Gaya" class="site-logo me-2">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item"><a class="nav-link" href="index.html#home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="about.html">About</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="faculty.html">Faculty</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button"
+                            data-bs-toggle="dropdown">Programs</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#programs">All Programs</a></li>
+                            <li><a class="dropdown-item" href="mba.html">MBA/PGPM</a></li>
+                            <li><a class="dropdown-item" href="dbm.html">MBA-DBM</a></li>
+                            <li><a class="dropdown-item" href="hhm.html">MBA-HHM</a></li>
+                            <li><a class="dropdown-item" href="ipm.html">IPM</a></li>
+                            <li><a class="dropdown-item" href="emba.html">Executive MBA</a></li>
+                            <li><a class="dropdown-item" href="phd.html">PhD</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="placements.html">Placements</a></li>
+                    <li class="nav-item"><a class="nav-link" href="campuslife.html">Campus Life</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#contact">Contact</a></li>
+
+                    <li class="nav-item ms-2">
+                        <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle Dark Mode">
+                            <i class="bi bi-moon-fill"></i>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <section class="hero-section">
+            <div class="container">
+                <h1>About IIM Bodh Gaya</h1>
+                <p>Creating Mindful Leaders for a Sustainable Future</p>
+            </div>
+        </section>
+
+        <section class="highlights-section">
+            <div class="container">
+                <div class="row text-center">
+                    <div class="col-md-3">
+                        <div class="highlight-item">
+                            <div class="highlight-number">2015</div>
+                            <div class="highlight-label">Year of Establishment</div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="highlight-item">
+                            <div class="highlight-number">AACSB</div>
+                            <div class="highlight-label">Internationally Accredited</div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="highlight-item">
+                            <div class="highlight-number">500+</div>
+                            <div class="highlight-label">Alumni Network</div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="highlight-item">
+                            <div class="highlight-number">Global</div>
+                            <div class="highlight-label">Partnerships & Collaborations</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-padding">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Our Vision, Mission & Values</h2>
+                </div>
+
+                <div class="section-grid">
+                    <div class="grid-item content-card">
+                        <h3>Vision</h3>
+                        <p>To be a globally recognised management school for developing socially responsible and mindful
+                            business leaders who create sustainable value.</p>
+                    </div>
+
+                    <div class="grid-item content-card">
+                        <h3>Mission</h3>
+                        <p>To nurture mindful business leaders who combine social responsibility with a global outlook,
+                            through strong academic programmes, practical learning and impactful research.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-padding" style="background-color: var(--bg-section-alt);">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Core Values</h2>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-8 mx-auto">
+                        <div class="content-card">
+                            <ul class="core-values">
+                                <li><strong>Mindfulness:</strong> Focused awareness and thoughtful action, fostered
+                                    through reflective practices.</li>
+                                <li><strong>Leadership:</strong> Authentic, ethical and transparent leadership that
+                                    builds trust and drives meaningful outcomes.</li>
+                                <li><strong>Social Responsibility:</strong> Commitment to ethical standards and
+                                    community engagement for positive societal impact.</li>
+                                <li><strong>Sustainability:</strong> Working for long-term wellbeing that balances
+                                    economic viability, social equity and environmental protection.</li>
+                                <li><strong>Lifelong Learning:</strong> Encouraging curiosity, adaptability and
+                                    continuous growth across careers and disciplines.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-padding">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Our Culture</h2>
+                </div>
+
+                <div class="row g-4">
+                    <div class="col-lg-8">
+                        <div class="content-card">
+                            <p>Our culture positions management as a force for good. We aim to balance financial,
+                                societal and ecological priorities. Diversity of thought, collaboration, and a spirit of
+                                inquiry guide our teaching, research and institutional choices. We work together to
+                                innovate and address complex challenges while looking out for each other.</p>
+                            <p>The IIM Bodh Gaya community is committed to creating an inclusive environment where every
+                                individual can thrive intellectually, professionally, and personally. Our residential
+                                campus fosters deep connections, cross-cultural understanding, and meaningful
+                                collaborations that extend far beyond the classroom.</p>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="content-card text-center">
+                            <img src="https://iimbg.ac.in/wp-content/uploads/2025/06/Mission-Vision-IIMBG-2025-Photos-2.jpg"
+                                alt="Campus Life" class="img-fluid rounded mb-3">
+                            <h5>Campus Experience</h5>
+                            <p style="font-size: 0.9rem; color: #666;">A vibrant residential community dedicated to
+                                holistic development and mindful leadership</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-padding" style="background-color: var(--bg-section-alt);">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Academic Approach</h2>
+                </div>
+
+                <div class="section-grid">
+                    <div class="grid-item content-card">
+                        <h3>Experiential Learning</h3>
+                        <p>We believe in learning by doing. Our curriculum combines theoretical knowledge with practical
+                            application through case studies, simulations, industry projects, and internships.</p>
+                    </div>
+
+                    <div class="grid-item content-card">
+                        <h3>Research-Driven</h3>
+                        <p>Our faculty actively engage in cutting-edge research that contributes to management knowledge
+                            while addressing real-world challenges in business and society.</p>
+                    </div>
+
+                    <div class="grid-item content-card">
+                        <h3>Global Perspective</h3>
+                        <p>We foster international partnerships, exchange programs, and diverse cohorts to prepare
+                            leaders who can navigate and thrive in a globalized business environment.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-padding">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Location & Contact</h2>
+                </div>
+
+                <div class="row g-4">
+                    <div class="col-lg-6">
+                        <div class="content-card">
+                            <h5>Address</h5>
+                            <p>
+                                Indian Institute of Management Bodh Gaya<br>
+                                Uruvela, Prabandh Vihar<br>
+                                Bodhgaya – 824234<br>
+                                Gaya, Bihar, India
+                            </p>
+
+                            <h5 class="mt-4">Contact Information</h5>
+                            <p>
+                                <strong>Email:</strong> <a
+                                    href="mailto:director_office@iimbg.ac.in">director_office@iimbg.ac.in</a><br>
+                                <strong>Website:</strong> <a href="https://iimbg.ac.in/" target="_blank"
+                                    rel="noopener">iimbg.ac.in</a>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="content-card">
+                            <h5>Connect With Us</h5>
+                            <p>For more information, admissions queries, or any other inquiries, please reach out to us.
+                            </p>
+                            <p style="margin-top: 2rem;">
+                                <a href="https://iimbg.ac.in/contact-us/" target="_blank" rel="noopener"
+                                    class="btn btn-primary">Visit Contact Page</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-section">
+            <div class="container">
+                <h2>Ready to Join Us?</h2>
+                <p style="font-size: 1.1rem; margin-top: 1rem;">Explore our programs and take the first step towards
+                    becoming a mindful leader</p>
+                <a href="index.html#programs" class="cta-button">Explore Programs</a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <h5>About IIM Bodh Gaya</h5>
+                    <p>Indian Institute of Management Bodh Gaya is committed to creating socially responsible managers
+                        and emotionally mature, mindful leaders who can make meaningful contributions to society.</p>
+                    <div class="social-icons mt-4">
+                        <a href="https://www.facebook.com/iimbodhgaya" target="_blank" rel="noopener"
+                            aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+                        <a href="https://x.com/iimbodhgaya" target="_blank" rel="noopener" aria-label="X"><i
+                                class="bi bi-twitter-x"></i></a>
+                        <a href="https://www.linkedin.com/school/iimbg/posts/?feedView=all" target="_blank"
+                            rel="noopener" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+                        <a href="https://www.instagram.com/iimbodhgaya/" target="_blank" rel="noopener"
+                            aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+                        <a href="https://www.youtube.com/@MediaPRCellIIMBodhGaya" target="_blank" rel="noopener"
+                            aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+                    </div>
+                </div>
+
+                <div class="col-lg-2 col-md-6">
+                    <h5>Quick Links</h5>
+                    <ul>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#programs">Programs</a></li>
+                        <li><a href="#placements">Placements</a></li>
+                        <li><a href="#campus">Campus Life</a></li>
+                        <li><a href="#contact">Contact Us</a></li>
+                        <li><a href="#">Careers</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <h5>Academic Programs</h5>
+                    <ul>
+                        <li><a href="#programs">MBA / PGPM</a></li>
+                        <li><a href="#programs">Integrated Programme (IPM)</a></li>
+                        <li><a href="#programs">MBA - Healthcare Management</a></li>
+                        <li><a href="#programs">Executive MBA (Online)</a></li>
+                        <li><a href="#programs">Ph.D. Program</a></li>
+                        <li><a href="#">Faculty Development</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <h5>Important Links</h5>
+                    <ul>
+                        <li><a href="#">Board of Governors</a></li>
+                        <li><a href="#">Faculty Directory</a></li>
+                        <li><a href="#">Right to Information</a></li>
+                        <li><a href="#">Tenders & Notices</a></li>
+                        <li><a href="#">Anti-Ragging Policy</a></li>
+                        <li><a href="#">Student Clubs</a></li>
+                        <li><a href="#">Alumni Network</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="row">
+                    <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                        <p class="mb-0">&copy; 2025 IIM Bodh Gaya. All rights reserved.</p>
+                    </div>
+                    <div class="col-md-6 text-center text-md-end">
+                        <p class="mb-0">
+                            <a href="#" style="margin-right: 15px;">Privacy Policy</a>
+                            <a href="#" style="margin-right: 15px;">Terms of Use</a>
+                            <a href="#">Sitemap</a>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="row mt-4">
+                    <div class="col-12 text-center" style="font-size: 0.9rem; opacity: 0.8;">
+                        <p class="mb-1"><strong>Director:</strong> Dr. Vinita S. Sahay</p>
+                        <p class="mb-0"><strong>Mentor Institution:</strong> IIM Calcutta</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const toggleBtn = document.getElementById('theme-toggle');
+            const icon = toggleBtn.querySelector('i');
+            const html = document.documentElement;
+
+            // 1. Check for saved user preference
+            const savedTheme = localStorage.getItem('theme');
+
+            if (savedTheme === 'dark') {
+                html.setAttribute('data-theme', 'dark');
+                icon.classList.remove('bi-moon-fill');
+                icon.classList.add('bi-sun-fill');
+            }
+
+            // 2. Handle Click Event
+            toggleBtn.addEventListener('click', () => {
+                const currentTheme = html.getAttribute('data-theme');
+
+                if (currentTheme === 'dark') {
+                    // Switch to Light
+                    html.removeAttribute('data-theme');
+                    localStorage.setItem('theme', 'light');
+                    icon.classList.remove('bi-sun-fill');
+                    icon.classList.add('bi-moon-fill');
+                } else {
+                    // Switch to Dark
+                    html.setAttribute('data-theme', 'dark');
+                    localStorage.setItem('theme', 'dark');
+                    icon.classList.remove('bi-moon-fill');
+                    icon.classList.add('bi-sun-fill');
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
