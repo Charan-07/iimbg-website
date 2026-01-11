@@ -7,9 +7,12 @@
     <title>MBA Program — IIM Bodh Gaya</title>
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.1/font/bootstrap-icons.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
     <style>
         /* ===== ROOT VARIABLES - Colors & Theming ===== */
@@ -18,61 +21,67 @@
             --primary-navy: #1e3a8a;
             --secondary-blue: #3b82f6;
             --accent-blue: #0ea5e9;
-            --light-gray: #f8fafc;
-            --dark-text: #1e293b;
-            --white: #ffffff;
+            --color-gold: #d4af37;
 
             /* SEMANTIC THEME VARIABLES (Default Light) */
             --bg-body: #ffffff;
             --bg-nav: #ffffff;
-            --bg-section-alt: #f8fafc;
+            --bg-section-alt: #fcfcfc;
             --bg-card: #ffffff;
             --bg-table: #ffffff;
             --bg-accordion: #ffffff;
             --bg-accordion-btn: #f8fafc;
-            --bg-alert: #f8f9fa;
+            --bg-alert: #f9f9f9;
 
-            --text-main: #1e293b;
+            --text-main: #2c3e50;
             --text-heading: #1e3a8a;
             --text-nav: #1e3a8a;
-            --text-muted: #6c757d;
+            --text-muted: #64748b;
 
             --border-color: #e2e8f0;
-            --shadow-subtle: rgba(0, 0, 0, 0.05);
-            --shadow-hover: rgba(0, 0, 0, 0.1);
+            --shadow-subtle: 0 10px 30px rgba(0, 0, 0, 0.05);
+            --shadow-grand: 0 20px 50px rgba(0, 0, 0, 0.1);
 
             --logo-bg: transparent;
 
-            /* Footer Background - Default Blue Gradient */
+            /* Footer Background */
             --bg-footer: linear-gradient(135deg, #1e3a8a 0%, #0f172a 100%);
         }
 
         /* DARK MODE OVERRIDES */
         [data-theme="dark"] {
-            --bg-body: #121212;
+            --bg-body: #0f172a;
             --bg-nav: #1e1e1e;
-            --bg-section-alt: #1e1e1e;
-            /* Darker grey section */
-            --bg-card: #262626;
-            --bg-table: #262626;
-            --bg-accordion: #262626;
-            --bg-accordion-btn: #1a1a1a;
-            --bg-alert: #2a2a2a;
+            --bg-section-alt: #162032;
+            --bg-card: #1e293b;
+            --bg-table: #1e293b;
+            --bg-accordion: #1e293b;
+            --bg-accordion-btn: #0f172a;
+            --bg-alert: #1e293b;
 
-            --text-main: #e0e0e0;
-            --text-heading: #60a5fa;
-            /* Lighter Blue for visibility */
+            --text-main: #cbd5e1;
+            --text-heading: #e2e8f0;
             --text-nav: #e0e0e0;
-            --text-muted: #a0a0a0;
+            --text-muted: #94a3b8;
 
             --border-color: rgba(255, 255, 255, 0.1);
-            --shadow-subtle: rgba(0, 0, 0, 0.5);
-            --shadow-hover: rgba(0, 0, 0, 0.7);
+            --shadow-subtle: 0 10px 30px rgba(0, 0, 0, 0.5);
+            --shadow-grand: 0 20px 50px rgba(0, 0, 0, 0.7);
 
             --logo-bg: rgba(255, 255, 255, 0.9);
 
-            /* Footer Background - Dark Mode Black Gradient */
             --bg-footer: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+        }
+
+        /* ===== BUTTON FIX FOR DARK MODE ===== */
+        [data-theme="dark"] .btn-outline-dark {
+            color: var(--text-main);
+            border-color: var(--text-main);
+        }
+
+        [data-theme="dark"] .btn-outline-dark:hover {
+            background-color: var(--text-main);
+            color: var(--bg-body);
         }
 
         /* ===== GLOBAL STYLES ===== */
@@ -80,8 +89,9 @@
             font-family: 'Open Sans', sans-serif;
             color: var(--text-main);
             background-color: var(--bg-body);
-            line-height: 1.6;
-            transition: background-color 0.3s ease, color 0.3s ease;
+            line-height: 1.8;
+            transition: background-color 0.4s ease, color 0.4s ease;
+            overflow-x: hidden;
         }
 
         h1,
@@ -90,11 +100,16 @@
         h4,
         h5,
         h6 {
-            font-family: 'Open Sans', sans-serif;
+            font-family: 'Playfair Display', serif;
             font-weight: 700;
             color: var(--text-heading);
-            text-shadow: 0 6px 12px rgba(0, 0, 0, 0.25), 0 2px 4px rgba(0, 0, 0, 0.12);
+            margin-bottom: 1rem;
             transition: color 0.3s ease;
+        }
+
+        .display-4 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
         }
 
         /* ===== NAVIGATION ===== */
@@ -104,10 +119,6 @@
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             border-bottom: 3px solid var(--secondary-blue);
             transition: background-color 0.3s ease;
-        }
-
-        .navbar-brand img {
-            max-height: 110px;
         }
 
         .site-logo {
@@ -142,7 +153,6 @@
             color: var(--secondary-blue) !important;
         }
 
-        /* Dropdowns */
         .dropdown-menu {
             background-color: var(--bg-card);
             border: 1px solid var(--border-color);
@@ -158,7 +168,6 @@
             color: var(--secondary-blue);
         }
 
-        /* Dark Mode Toggle Button */
         .theme-toggle-btn {
             background: none;
             border: none;
@@ -175,184 +184,322 @@
         }
 
         /* ===== HERO ===== */
-        .hero-section {
-            background: linear-gradient(135deg, var(--primary-navy) 0%, var(--secondary-blue) 100%);
-            color: white;
-            padding: 80px 0;
-            text-align: center;
-        }
-
-        .hero-section h1 {
-            color: white !important;
-            margin-bottom: 1rem;
-        }
-
-        .hero-section p {
-            color: rgba(255, 255, 255, 0.9);
-            font-size: 1.2rem;
-        }
-
-        .section-padding {
-            padding: 80px 0;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        .section-title h2 {
-            font-size: 2.25rem;
+        .hero-grand {
+            height: 80vh;
+            min-height: 600px;
             position: relative;
-            padding-bottom: 1rem;
-            display: inline-block;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            background: url('assets/images/A16.jpg') no-repeat center center/cover;
+            background-attachment: fixed;
         }
 
-        .section-title h2::after {
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, rgba(30, 58, 138, 0.7), rgba(15, 23, 42, 0.9));
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+            padding: 0 20px;
+        }
+
+        .hero-tag {
+            display: inline-block;
+            padding: 8px 24px;
+            border: 1px solid var(--color-gold);
+            color: var(--color-gold);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            color: white;
+            text-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero-lead {
+            font-size: 1.3rem;
+            font-weight: 300;
+            color: rgba(255, 255, 255, 0.9);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* ===== SECTION STYLES ===== */
+        .section-padding {
+            padding: 100px 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title-grand {
+            font-size: 3rem;
+            color: var(--text-heading);
+            position: relative;
+            display: inline-block;
+            padding-bottom: 20px;
+        }
+
+        .section-title-grand::after {
             content: '';
             position: absolute;
             bottom: 0;
             left: 50%;
             transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background-color: var(--secondary-blue);
+            width: 60px;
+            height: 3px;
+            background-color: var(--color-gold);
         }
 
-        /* ===== HIGHLIGHT CARDS & GENERAL CARDS ===== */
-        .highlight-card {
+        /* ===== HIGHLIGHT BOXES ===== */
+        .grand-card {
+            background: var(--bg-card);
+            padding: 40px 30px;
+            border: 1px solid var(--border-color);
+            transition: all 0.4s ease;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            height: 100%;
+        }
+
+        .grand-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--color-gold);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .grand-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-grand);
+        }
+
+        .grand-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .grand-icon {
+            font-size: 2.5rem;
+            color: var(--primary-navy);
+            margin-bottom: 20px;
+            transition: color 0.3s ease;
+        }
+
+        [data-theme="dark"] .grand-icon {
+            color: var(--color-gold);
+        }
+
+        .grand-card:hover .grand-icon {
+            color: var(--color-gold);
+        }
+
+        /* ===== TABS & CURRICULUM ===== */
+        .elegant-tabs {
+            border-bottom: 1px solid var(--border-color);
+            justify-content: center;
+            margin-bottom: 3rem;
+        }
+
+        .elegant-tabs .nav-link {
+            border: none;
+            color: var(--text-muted);
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            padding: 15px 30px;
+            background: transparent;
+            position: relative;
+            opacity: 0.7;
+            transition: all 0.3s ease;
+        }
+
+        .elegant-tabs .nav-link:hover {
+            color: var(--text-heading);
+            opacity: 1;
+        }
+
+        .elegant-tabs .nav-link.active {
+            color: var(--text-heading);
+            background: transparent;
+            opacity: 1;
+        }
+
+        .elegant-tabs .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%) scaleX(0);
+            width: 40px;
+            height: 2px;
+            background-color: var(--color-gold);
+            transition: transform 0.3s ease;
+        }
+
+        .elegant-tabs .nav-link.active::after {
+            transform: translateX(-50%) scaleX(1);
+        }
+
+        .curriculum-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .curriculum-list li {
+            padding: 15px 0;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            color: var(--text-main);
+        }
+
+        .curriculum-list li i {
+            color: var(--color-gold);
+            margin-right: 15px;
+            font-size: 0.8rem;
+        }
+
+        .term-card {
             background: var(--bg-card);
             border: 1px solid var(--border-color);
-            border-radius: 10px;
-            padding: 25px;
+            padding: 30px;
             height: 100%;
-            transition: transform 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
-            text-align: center;
+            transition: all 0.3s ease;
         }
 
-        .highlight-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--secondary-blue);
-            box-shadow: 0 10px 20px var(--shadow-hover);
+        .term-card:hover {
+            box-shadow: var(--shadow-grand);
+            border-color: var(--color-gold);
         }
 
-        .highlight-icon {
-            font-size: 2.5rem;
-            color: var(--accent-blue);
-            margin-bottom: 15px;
-            display: block;
-        }
-
-        .highlight-title {
-            font-weight: 700;
+        .term-title {
+            font-family: 'Playfair Display', serif;
             color: var(--text-heading);
-            margin-bottom: 10px;
-            font-size: 1.1rem;
-        }
-
-        /* General Cards (like in Fees section) */
-        .card {
-            background-color: var(--bg-card);
-            border: 1px solid var(--border-color);
-            transition: background-color 0.3s ease;
-        }
-
-        .card-header {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
             border-bottom: 1px solid var(--border-color);
         }
 
-        .list-group-item {
-            background-color: var(--bg-card);
-            color: var(--text-main);
-            border-color: var(--border-color);
-        }
-
-        .alert-light {
-            background-color: var(--bg-alert);
-            border-color: var(--border-color);
-            color: var(--text-main);
-        }
-
-        /* ===== TABLES & TABS ===== */
-        .nav-tabs .nav-link {
-            color: var(--text-main);
-            font-weight: 600;
-            border-color: transparent;
-        }
-
-        .nav-tabs .nav-link:hover {
-            border-color: var(--border-color);
-            isolation: isolate;
-        }
-
-        .nav-tabs .nav-link.active {
-            color: var(--secondary-blue);
-            background-color: var(--bg-body);
-            border-color: var(--border-color) var(--border-color) var(--bg-body);
-            border-bottom: 3px solid var(--secondary-blue);
-        }
-
-        .course-table {
+        /* ===== MAJESTIC TABLE ===== */
+        .majestic-table {
             width: 100%;
             border-collapse: separate;
             border-spacing: 0;
-            border: 1px solid var(--border-color);
-            border-radius: 10px;
+            border-radius: 8px;
             overflow: hidden;
-            background-color: var(--bg-table);
+            background: var(--bg-card);
+            box-shadow: var(--shadow-subtle);
+            border: 1px solid var(--border-color);
         }
 
-        .course-table th {
+        .majestic-table thead th {
             background-color: var(--primary-navy);
-            color: white;
-            padding: 15px;
-            text-align: left;
+            color: var(--color-gold);
+            font-family: 'Playfair Display', serif;
+            font-weight: normal;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 20px;
+            border: none;
         }
 
-        .course-table td {
-            padding: 15px;
+        .majestic-table tbody td {
+            padding: 20px;
             border-bottom: 1px solid var(--border-color);
-            color: var(--text-main);
+            color: var(--text-muted);
+            font-family: 'Open Sans', sans-serif;
+            vertical-align: middle;
+            transition: color 0.3s ease;
         }
 
-        .course-table tr:last-child td {
+        .majestic-table tbody tr:last-child td {
             border-bottom: none;
         }
 
-        /* Accordion Styles */
+        .majestic-table tbody tr:hover td {
+            background-color: rgba(212, 175, 55, 0.05);
+            /* Subtle gold tint */
+            color: var(--text-heading);
+        }
+
+        /* ===== ACCORDION ===== */
         .accordion-item {
-            background-color: var(--bg-accordion);
-            border-color: var(--border-color);
+            background-color: var(--bg-card);
+            border: none;
+            border-bottom: 1px solid var(--border-color);
         }
 
         .accordion-button {
-            background-color: var(--bg-accordion-btn);
+            background-color: transparent;
             color: var(--text-heading);
-            font-weight: 600;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            padding: 20px 30px;
+            box-shadow: none !important;
         }
 
         .accordion-button:not(.collapsed) {
-            background-color: var(--secondary-blue);
-            color: white;
+            color: var(--color-gold);
+            background-color: transparent;
         }
 
         .accordion-button::after {
-            filter: grayscale(1);
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%231e3a8a'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+            margin-left: auto;
         }
 
-        .accordion-button:not(.collapsed)::after {
-            filter: invert(1) grayscale(100%) brightness(200%);
-        }
-
-        .accordion-button:focus {
-            box-shadow: none;
+        [data-theme="dark"] .accordion-button::after {
+            filter: invert(1);
         }
 
         .accordion-body {
-            color: var(--text-main);
+            padding: 0 30px 30px 30px;
+            color: var(--text-muted);
+            line-height: 1.7;
         }
 
-        /* Footer */
+        /* ===== SCHOLARSHIP CARD ===== */
+        .scholarship-box {
+            background: var(--bg-card);
+            padding: 50px;
+            border: 1px solid var(--border-color);
+            position: relative;
+            box-shadow: var(--shadow-grand);
+        }
+
+        .scholarship-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--color-gold);
+        }
+
+        /* ===== FOOTER ===== */
         .footer {
             background: var(--bg-footer);
             color: white;
@@ -364,6 +511,8 @@
             color: var(--accent-blue);
             margin-bottom: 1.5rem;
             font-size: 1.2rem;
+            font-family: 'Open Sans', sans-serif;
+            /* OVERRIDE: Matches other pages */
         }
 
         .footer a {
@@ -402,17 +551,44 @@
             padding-top: 2rem;
         }
 
-        /* Helper classes */
-        .text-primary-navy {
-            color: var(--text-heading) !important;
+        /* ===== HELPER CLASSES ===== */
+        .bg-light-alt {
+            background-color: var(--bg-section-alt) !important;
         }
 
         .text-muted {
             color: var(--text-muted) !important;
         }
 
-        .bg-light-alt {
-            background-color: var(--bg-section-alt) !important;
+        .text-heading {
+            color: var(--text-heading) !important;
+        }
+
+        #gold-dust {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        /* Smooth Scroll */
+        html.lenis {
+            height: auto;
+        }
+
+        .lenis.lenis-smooth {
+            scroll-behavior: auto;
+        }
+
+        .lenis.lenis-smooth [data-lenis-prevent] {
+            overscroll-behavior: contain;
+        }
+
+        .lenis.lenis-stopped {
+            overflow: hidden;
         }
     </style>
 </head>
@@ -446,7 +622,7 @@
                     </li>
                     <li class="nav-item"><a class="nav-link" href="placements.html">Placements</a></li>
                     <li class="nav-item"><a class="nav-link" href="campuslife.html">Campus Life</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#contact">Contact</a></li>
 
                     <li class="nav-item ms-2">
                         <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle Dark Mode">
@@ -459,63 +635,69 @@
     </nav>
 
     <main>
-        <section class="hero-section">
-            <div class="container">
-                <h1>Master of Business Administration (MBA)</h1>
-                <p>Equipping students for an industry-led career in the global environment</p>
+        <section class="hero-grand">
+            <canvas id="gold-dust"></canvas>
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+                <span class="hero-tag" data-aos="fade-down" data-aos-delay="100">Flagship Programme</span>
+                <h1 class="hero-title" data-aos="fade-up" data-aos-delay="300">Master of Business Administration</h1>
+                <p class="hero-lead" data-aos="fade-up" data-aos-delay="500">Crafting global leaders through rigour,
+                    resilience, and responsibility.</p>
             </div>
         </section>
 
         <section class="section-padding">
             <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-lg-6">
-                        <h2 class="mb-4 text-primary-navy">Program Overview</h2>
-                        <p class="lead">The 2-year Programme in Master of Business Administration (MBA) imparts
-                            theoretical and practical erudition of different functional areas of Management.</p>
-                        <p>The programme is designed to enhance our students with a strong awareness and knowledge about
-                            the socio-economic environment both at national and global levels. The objective is to bring
-                            into being a <strong>Global Manager</strong> not only with strong analytical and
-                            decision-making skills but an overall personality with socially enviable values and ethics.
-                        </p>
-                        <p>To achieve this, the curriculum uses a range of audio-visual based teaching methodologies
-                            like case studies, real-life problem solving, role-play, group discussion, and computer
-                            simulation.</p>
+                <div class="row justify-content-center">
+                    <div class="col-lg-10">
+                        <div class="text-center mb-5">
+                            <h2 class="display-4 text-heading mb-4" data-aos="fade-up">The Pursuit of Excellence</h2>
+                            <p class="lead text-muted" data-aos="fade-up" data-aos-delay="200"
+                                style="font-size: 1.25rem; line-height: 1.9;">
+                                The 2-year full-time MBA is not just a degree; it is a transformation. Designed to
+                                enhance awareness of the global socio-economic environment, our curriculum forges
+                                <strong>Global Managers</strong> equipped with analytical prowess and ethical grounding.
+                            </p>
+                        </div>
                     </div>
-                    <div class="col-lg-6">
-                        <div class="row g-3">
-                            <div class="col-md-6">
-                                <div class="highlight-card">
-                                    <i class="bi bi-globe highlight-icon"></i>
-                                    <div class="highlight-title">Global Exposure</div>
-                                    <p class="small text-muted">International Student Exchange Programme with reputed
-                                        institutes worldwide.</p>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="highlight-card">
-                                    <i class="bi bi-people highlight-icon"></i>
-                                    <div class="highlight-title">Batch Diversity</div>
-                                    <p class="small text-muted">Proactive approach to promote equality in gender,
-                                        ethnicity, and education.</p>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="highlight-card">
-                                    <i class="bi bi-journal-richtext highlight-icon"></i>
-                                    <div class="highlight-title">Case Study Method</div>
-                                    <p class="small text-muted">Pedagogy stresses learning with extensive case study
-                                        discussions.</p>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="highlight-card">
-                                    <i class="bi bi-tree highlight-icon"></i>
-                                    <div class="highlight-title">Sustainability</div>
-                                    <p class="small text-muted">Focus on ethical leadership and leaving the planet
-                                        better for future generations.</p>
-                                </div>
-                            </div>
+                </div>
+
+                <div class="row g-4 mt-4">
+                    <div class="col-md-3" data-aos="fade-up" data-aos-delay="100">
+                        <div class="grand-card" data-tilt data-tilt-max="10" data-tilt-speed="400" data-tilt-glare
+                            data-tilt-max-glare="0.2">
+                            <i class="bi bi-globe grand-icon"></i>
+                            <h5 class="text-heading font-serif">Global Exposure</h5>
+                            <p class="small text-muted">International exchange programs with reputed global institutes.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3" data-aos="fade-up" data-aos-delay="200">
+                        <div class="grand-card" data-tilt data-tilt-max="10" data-tilt-speed="400" data-tilt-glare
+                            data-tilt-max-glare="0.2">
+                            <i class="bi bi-people grand-icon"></i>
+                            <h5 class="text-heading font-serif">Diverse Cohort</h5>
+                            <p class="small text-muted">A proactive approach to gender, academic, and cultural
+                                diversity.</p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3" data-aos="fade-up" data-aos-delay="300">
+                        <div class="grand-card" data-tilt data-tilt-max="10" data-tilt-speed="400" data-tilt-glare
+                            data-tilt-max-glare="0.2">
+                            <i class="bi bi-journal-richtext grand-icon"></i>
+                            <h5 class="text-heading font-serif">Case Method</h5>
+                            <p class="small text-muted">Immersive pedagogy involving real-life problem solving.</p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3" data-aos="fade-up" data-aos-delay="400">
+                        <div class="grand-card" data-tilt data-tilt-max="10" data-tilt-speed="400" data-tilt-glare
+                            data-tilt-max-glare="0.2">
+                            <i class="bi bi-tree grand-icon"></i>
+                            <h5 class="text-heading font-serif">Sustainability</h5>
+                            <p class="small text-muted">Creating leaders who prioritize the planet alongside profit.</p>
                         </div>
                     </div>
                 </div>
@@ -524,86 +706,63 @@
 
         <section class="section-padding bg-light-alt">
             <div class="container">
-                <div class="section-title">
-                    <h2>Curriculum Structure</h2>
-                    <p class="text-muted">Rigorous academic framework designed for holistic development</p>
+                <div class="section-header">
+                    <h2 class="section-title-grand" data-aos="fade-up">Academic Framework</h2>
+                    <p class="text-muted mt-3" data-aos="fade-up" data-aos-delay="100">A rigorous journey across two
+                        years</p>
                 </div>
 
-                <div class="row mb-5">
-                    <div class="col-lg-12">
-                        <div class="alert alert-light border shadow-sm">
-                            <h5 class="alert-heading"><i class="bi bi-info-circle-fill text-primary me-2"></i>Structure
-                            </h5>
-                            <p class="mb-0">The MBA Programme is divided into three segments: <strong>Core
-                                    Courses</strong> (First Year), <strong>Summer Internship</strong> (8 weeks), and
-                                <strong>Elective Courses</strong> (Second Year). An academic year consists of three
-                                terms, each spanning 11 to 13 weeks.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                <ul class="nav nav-tabs mb-4" id="curriculumTabs" role="tablist">
+                <ul class="nav nav-pills elegant-tabs" id="curriculumTabs" role="tablist">
                     <li class="nav-item" role="presentation">
-                        <button class="nav-link active" id="year1-tab" data-bs-toggle="tab" data-bs-target="#year1"
-                            type="button" role="tab">First Year (Core)</button>
+                        <button class="nav-link active" id="year1-tab" data-bs-toggle="pill" data-bs-target="#year1"
+                            type="button" role="tab">The Foundation (Year 1)</button>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="year2-tab" data-bs-toggle="tab" data-bs-target="#year2"
-                            type="button" role="tab">Second Year (Electives)</button>
+                        <button class="nav-link" id="year2-tab" data-bs-toggle="pill" data-bs-target="#year2"
+                            type="button" role="tab">The Specialization (Year 2)</button>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="credits-tab" data-bs-toggle="tab" data-bs-target="#credits"
+                        <button class="nav-link" id="credits-tab" data-bs-toggle="pill" data-bs-target="#credits"
                             type="button" role="tab">Credit System</button>
                     </li>
                 </ul>
 
                 <div class="tab-content" id="curriculumTabContent">
-
                     <div class="tab-pane fade show active" id="year1" role="tabpanel">
                         <div class="row g-4">
-                            <div class="col-md-4">
-                                <div class="card h-100 border-0 shadow-sm">
-                                    <div class="card-header bg-primary text-white fw-bold">Term 1</div>
-                                    <ul class="list-group list-group-flush">
-                                        <li class="list-group-item">Management Accounting I</li>
-                                        <li class="list-group-item">Organizational Behaviour I</li>
-                                        <li class="list-group-item">Marketing Management I</li>
-                                        <li class="list-group-item">Microeconomics</li>
-                                        <li class="list-group-item">Statistics for Management</li>
-                                        <li class="list-group-item">Information Technology & Systems</li>
-                                        <li class="list-group-item">Business Communication</li>
-                                        <li class="list-group-item">Sustainable Development</li>
+                            <div class="col-lg-4">
+                                <div class="term-card">
+                                    <h4 class="term-title">Term I</h4>
+                                    <ul class="curriculum-list">
+                                        <li><i class="bi bi-diamond-fill"></i> Management Accounting I</li>
+                                        <li><i class="bi bi-diamond-fill"></i> Organizational Behaviour I</li>
+                                        <li><i class="bi bi-diamond-fill"></i> Marketing Management I</li>
+                                        <li><i class="bi bi-diamond-fill"></i> Microeconomics</li>
+                                        <li><i class="bi bi-diamond-fill"></i> Statistics for Management</li>
                                     </ul>
                                 </div>
                             </div>
-                            <div class="col-md-4">
-                                <div class="card h-100 border-0 shadow-sm">
-                                    <div class="card-header bg-primary text-white fw-bold">Term 2</div>
-                                    <ul class="list-group list-group-flush">
-                                        <li class="list-group-item">Management Accounting II</li>
-                                        <li class="list-group-item">Financial Management I</li>
-                                        <li class="list-group-item">Organizational Behavior II</li>
-                                        <li class="list-group-item">Mindfulness at Workplace</li>
-                                        <li class="list-group-item">Marketing Management II</li>
-                                        <li class="list-group-item">Macroeconomics</li>
-                                        <li class="list-group-item">Operations Research</li>
-                                        <li class="list-group-item">Design Thinking</li>
+                            <div class="col-lg-4">
+                                <div class="term-card">
+                                    <h4 class="term-title">Term II</h4>
+                                    <ul class="curriculum-list">
+                                        <li><i class="bi bi-diamond-fill"></i> Financial Management I</li>
+                                        <li><i class="bi bi-diamond-fill"></i> Mindfulness at Workplace</li>
+                                        <li><i class="bi bi-diamond-fill"></i> Macroeconomics</li>
+                                        <li><i class="bi bi-diamond-fill"></i> Operations Research</li>
+                                        <li><i class="bi bi-diamond-fill"></i> Design Thinking</li>
                                     </ul>
                                 </div>
                             </div>
-                            <div class="col-md-4">
-                                <div class="card h-100 border-0 shadow-sm">
-                                    <div class="card-header bg-primary text-white fw-bold">Term 3</div>
-                                    <ul class="list-group list-group-flush">
-                                        <li class="list-group-item">Financial Management II</li>
-                                        <li class="list-group-item">Human Resource Management</li>
-                                        <li class="list-group-item">Marketing Management III</li>
-                                        <li class="list-group-item">Operations Management</li>
-                                        <li class="list-group-item">Business Data Analytics</li>
-                                        <li class="list-group-item">Foreign Language</li>
-                                        <li class="list-group-item">Strategic Management</li>
-                                        <li class="list-group-item">Indian Legal System</li>
+                            <div class="col-lg-4">
+                                <div class="term-card">
+                                    <h4 class="term-title">Term III</h4>
+                                    <ul class="curriculum-list">
+                                        <li><i class="bi bi-diamond-fill"></i> Human Resource Management</li>
+                                        <li><i class="bi bi-diamond-fill"></i> Business Data Analytics</li>
+                                        <li><i class="bi bi-diamond-fill"></i> Strategic Management</li>
+                                        <li><i class="bi bi-diamond-fill"></i> Indian Legal System</li>
+                                        <li><i class="bi bi-diamond-fill"></i> Foreign Language</li>
                                     </ul>
                                 </div>
                             </div>
@@ -611,85 +770,70 @@
                     </div>
 
                     <div class="tab-pane fade" id="year2" role="tabpanel">
-                        <div class="accordion" id="electivesAccordion">
-                            <div class="accordion-item">
-                                <h2 class="accordion-header">
-                                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#marketing" aria-expanded="true">
-                                        Marketing
-                                    </button>
-                                </h2>
-                                <div id="marketing" class="accordion-collapse collapse show"
-                                    data-bs-parent="#electivesAccordion">
-                                    <div class="accordion-body">
-                                        Consumer Behaviour, Sales & Distribution Management, Brand Management, Product
-                                        Management, Integrated Marketing Communication, Digital Marketing, Marketing
-                                        Analytics, Pricing Strategies, B2B Marketing, Services Marketing, Luxury &
-                                        Fashion Management.
+                        <div class="row justify-content-center">
+                            <div class="col-lg-10">
+                                <div class="accordion" id="electivesAccordion">
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header">
+                                            <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                                data-bs-target="#marketing" aria-expanded="true">
+                                                Marketing Strategy
+                                            </button>
+                                        </h2>
+                                        <div id="marketing" class="accordion-collapse collapse show"
+                                            data-bs-parent="#electivesAccordion">
+                                            <div class="accordion-body">
+                                                Consumer Behaviour, Sales & Distribution, Brand Management, Product
+                                                Management, Digital Marketing, Marketing Analytics, Luxury & Fashion
+                                                Management.
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="accordion-item">
-                                <h2 class="accordion-header">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#finance">
-                                        Finance & Accounting
-                                    </button>
-                                </h2>
-                                <div id="finance" class="accordion-collapse collapse"
-                                    data-bs-parent="#electivesAccordion">
-                                    <div class="accordion-body">
-                                        Security Analysis & Portfolio Management, Financial Derivatives, Business
-                                        Analysis and Valuation, Financial Statement Analysis, Commercial Banking &
-                                        Credit Lending, Project Appraisal & Finance, Financial Risk Management, Fixed
-                                        Income Securities, Investment Banking, International Finance.
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header">
+                                            <button class="accordion-button collapsed" type="button"
+                                                data-bs-toggle="collapse" data-bs-target="#finance">
+                                                Finance & Investment
+                                            </button>
+                                        </h2>
+                                        <div id="finance" class="accordion-collapse collapse"
+                                            data-bs-parent="#electivesAccordion">
+                                            <div class="accordion-body">
+                                                Security Analysis, Portfolio Management, Financial Derivatives, Business
+                                                Valuation, Investment Banking, International Finance, Financial Risk
+                                                Management.
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="accordion-item">
-                                <h2 class="accordion-header">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#ops">
-                                        Operations Management & Quantitative Techniques
-                                    </button>
-                                </h2>
-                                <div id="ops" class="accordion-collapse collapse" data-bs-parent="#electivesAccordion">
-                                    <div class="accordion-body">
-                                        Supply Chain Management, Total Quality Management & Lean Six Sigma, Service
-                                        Operations, Project Management, Logistics Management, Sustainable Product Design
-                                        & Development, Operation Strategy.
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header">
+                                            <button class="accordion-button collapsed" type="button"
+                                                data-bs-toggle="collapse" data-bs-target="#ops">
+                                                Operations & Decision Sciences
+                                            </button>
+                                        </h2>
+                                        <div id="ops" class="accordion-collapse collapse"
+                                            data-bs-parent="#electivesAccordion">
+                                            <div class="accordion-body">
+                                                Supply Chain Management, Total Quality Management, Lean Six Sigma,
+                                                Service Operations, Project Management, Sustainable Product Design.
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="accordion-item">
-                                <h2 class="accordion-header">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#it">
-                                        IT Systems & Analytics
-                                    </button>
-                                </h2>
-                                <div id="it" class="accordion-collapse collapse" data-bs-parent="#electivesAccordion">
-                                    <div class="accordion-body">
-                                        Data Science for Managers using Python, Digital Transformation through AI,
-                                        Storytelling with Data, Enterprise Resource Planning, Advance Business
-                                        Analytics, Business Intelligence and Data Modelling, Cloud Computing and IoT,
-                                        Big Data Analytics, Electronic Commerce.
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="accordion-item">
-                                <h2 class="accordion-header">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#strategy">
-                                        Strategy & General Management
-                                    </button>
-                                </h2>
-                                <div id="strategy" class="accordion-collapse collapse"
-                                    data-bs-parent="#electivesAccordion">
-                                    <div class="accordion-body">
-                                        Decoding Business Models, Management Consulting, Mergers & Acquisitions &
-                                        Strategic Alliances, International Business, Strategy & Organizational
-                                        Leadership.
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header">
+                                            <button class="accordion-button collapsed" type="button"
+                                                data-bs-toggle="collapse" data-bs-target="#strategy">
+                                                Strategy & General Management
+                                            </button>
+                                        </h2>
+                                        <div id="strategy" class="accordion-collapse collapse"
+                                            data-bs-parent="#electivesAccordion">
+                                            <div class="accordion-body">
+                                                Decoding Business Models, Management Consulting, Mergers & Acquisitions,
+                                                International Business, Organizational Leadership.
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -697,45 +841,41 @@
                     </div>
 
                     <div class="tab-pane fade" id="credits" role="tabpanel">
-                        <div class="table-responsive">
-                            <table class="course-table">
-                                <thead>
-                                    <tr>
-                                        <th>Course Credit</th>
-                                        <th>Credit Points</th>
-                                        <th>No of Sessions</th>
-                                        <th>Contact Hours</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>Full</td>
-                                        <td>3</td>
-                                        <td>20</td>
-                                        <td>30</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Three-Fourth</td>
-                                        <td>2.25</td>
-                                        <td>15</td>
-                                        <td>22.5</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Half</td>
-                                        <td>1.5</td>
-                                        <td>10</td>
-                                        <td>15</td>
-                                    </tr>
-                                    <tr>
-                                        <td>One-third</td>
-                                        <td>1</td>
-                                        <td>7 (6+1)</td>
-                                        <td>10 (1.5*6+1)</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <p class="mt-3 text-muted small">* Summer project is considered equivalent to 3-credit
-                                points.</p>
+                        <div class="row justify-content-center">
+                            <div class="col-lg-8">
+                                <div class="table-responsive">
+                                    <table class="majestic-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Course Type</th>
+                                                <th>Credit Points</th>
+                                                <th>Sessions</th>
+                                                <th>Contact Hours</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Full Course</td>
+                                                <td>3</td>
+                                                <td>20</td>
+                                                <td>30</td>
+                                            </tr>
+                                            <tr>
+                                                <td>3/4 Course</td>
+                                                <td>2.25</td>
+                                                <td>15</td>
+                                                <td>22.5</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Half Course</td>
+                                                <td>1.5</td>
+                                                <td>10</td>
+                                                <td>15</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -744,43 +884,35 @@
 
         <section class="section-padding">
             <div class="container">
-                <div class="section-title">
-                    <h2>Fees & Financial Aid</h2>
-                </div>
-                <div class="row g-4 justify-content-center">
-                    <div class="col-md-8">
-                        <div class="card border-0 shadow-lg">
-                            <div class="card-body p-5">
-                                <h4 class="mb-3 text-primary-navy">Scholarships</h4>
-                                <p>The following Government of India scholarships are available to eligible MBA
-                                    students:</p>
-                                <ul class="list-group list-group-flush mb-4">
-                                    <li class="list-group-item"><i
-                                            class="bi bi-check-circle-fill text-success me-2"></i> Central Sector
-                                        Scholarship Scheme of Top Class Education for Scheduled Castes Students
-                                        (Ministry of Social Justice and Empowerment)</li>
-                                    <li class="list-group-item"><i
-                                            class="bi bi-check-circle-fill text-success me-2"></i> Central Sector
-                                        Scholarship Scheme of Top Class Education for Scheduled Tribes Students
-                                        (Ministry of Tribal Affairs)</li>
-                                    <li class="list-group-item"><i
-                                            class="bi bi-check-circle-fill text-success me-2"></i> Merit-cum means based
-                                        scholarship scheme for minority communities</li>
-                                    <li class="list-group-item"><i
-                                            class="bi bi-check-circle-fill text-success me-2"></i> Scheme of Scholarship
-                                        for Top Class Education for Students with Disabilities</li>
-                                </ul>
-
-                                <div class="d-grid gap-2 d-md-block">
-                                    <a href="https://iimbg.ac.in/wp-content/uploads/2025/05/IIM-BG-MBA-2025-27-ANNEXURE-2.pdf"
-                                        target="_blank" class="btn btn-primary rounded-pill px-4 me-2">
-                                        <i class="bi bi-file-earmark-pdf me-2"></i>Fee Structure (2025-27)
-                                    </a>
-
-                                    <a href="https://iimbg.ac.in/wp-content/uploads/2024/05/MBA_2024-26_Fee_detail.pdf"
-                                        target="_blank" class="btn btn-outline-primary rounded-pill px-4">
-                                        <i class="bi bi-file-earmark-pdf me-2"></i>Fee Structure (2024-26)
-                                    </a>
+                <div class="row justify-content-center">
+                    <div class="col-lg-10" data-aos="fade-up">
+                        <div class="scholarship-box">
+                            <div class="row align-items-center">
+                                <div class="col-md-7">
+                                    <h3 class="font-serif mb-3 text-heading">Invest in Your Future</h3>
+                                    <p class="text-muted mb-4">We ensure that financial constraints never hinder talent.
+                                        Multiple Government of India scholarships are available for eligible students.
+                                    </p>
+                                    <ul class="list-unstyled text-muted">
+                                        <li class="mb-2"><i class="bi bi-check2 text-success me-2"></i> Central Sector
+                                            Scholarship (SC/ST)</li>
+                                        <li class="mb-2"><i class="bi bi-check2 text-success me-2"></i> Merit-cum-Means
+                                            Scholarship</li>
+                                        <li class="mb-2"><i class="bi bi-check2 text-success me-2"></i> Scholarship for
+                                            Students with Disabilities</li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-5 text-center">
+                                    <div class="d-grid gap-3">
+                                        <a href="https://iimbg.ac.in/wp-content/uploads/2025/05/IIM-BG-MBA-2025-27-ANNEXURE-2.pdf"
+                                            target="_blank" class="btn btn-outline-dark rounded-0 py-3">
+                                            VIEW FEE STRUCTURE
+                                        </a>
+                                        <a href="#" class="btn btn-primary rounded-0 py-3"
+                                            style="background-color: var(--primary-navy); border: none;">
+                                            CONTACT ADMISSIONS
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -798,11 +930,16 @@
                     <p>Indian Institute of Management Bodh Gaya is committed to creating socially responsible managers
                         and emotionally mature, mindful leaders who can make meaningful contributions to society.</p>
                     <div class="social-icons mt-4">
-                        <a href="#" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
-                        <a href="#" aria-label="Twitter"><i class="bi bi-twitter-x"></i></a>
-                        <a href="#" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
-                        <a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
-                        <a href="#" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+                        <a href="https://www.facebook.com/iimbodhgaya" target="_blank" rel="noopener"
+                            aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+                        <a href="https://x.com/iimbodhgaya" target="_blank" rel="noopener" aria-label="Twitter"><i
+                                class="bi bi-twitter-x"></i></a>
+                        <a href="https://www.linkedin.com/school/iimbg/posts/?feedView=all" target="_blank"
+                            rel="noopener" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+                        <a href="https://www.instagram.com/iimbodhgaya/" target="_blank" rel="noopener"
+                            aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+                        <a href="https://www.youtube.com/@MediaPRCellIIMBodhGaya" target="_blank" rel="noopener"
+                            aria-label="YouTube"><i class="bi bi-youtube"></i></a>
                     </div>
                 </div>
 
@@ -904,6 +1041,103 @@
                 }
             });
         });
+    </script>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
+
+    <script>
+        // 1. Initialize Scroll Animations (AOS)
+        AOS.init({
+            duration: 1000,
+            once: true,
+            offset: 100,
+            easing: 'ease-out-cubic'
+        });
+
+        // 2. Initialize Smooth Scroll (Lenis)
+        const lenis = new Lenis({
+            duration: 1.2,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            smooth: true
+        });
+
+        function raf(time) {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+        }
+        requestAnimationFrame(raf);
+
+        // 3. Parallax Hero Effect
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('.hero-grand');
+            if (hero) {
+                hero.style.backgroundPositionY = -(scrolled * 0.5) + 'px';
+            }
+        });
+
+        // 5. Gold Dust Particles
+        const canvas = document.getElementById('gold-dust');
+        if (canvas) {
+            const ctx = canvas.getContext('2d');
+            let particlesArray;
+
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+
+            window.addEventListener('resize', () => {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+                initParticles();
+            });
+
+            class Particle {
+                constructor() {
+                    this.x = Math.random() * canvas.width;
+                    this.y = Math.random() * canvas.height;
+                    this.size = Math.random() * 2 + 0.5;
+                    this.speedX = Math.random() * 0.5 - 0.25;
+                    this.speedY = Math.random() * 0.5 - 0.25;
+                    this.opacity = Math.random() * 0.5 + 0.1;
+                }
+                update() {
+                    this.x += this.speedX;
+                    this.y += this.speedY;
+                    if (this.x > canvas.width) this.x = 0;
+                    if (this.x < 0) this.x = canvas.width;
+                    if (this.y > canvas.height) this.y = 0;
+                    if (this.y < 0) this.y = canvas.height;
+                }
+                draw() {
+                    ctx.fillStyle = `rgba(212, 175, 55, ${this.opacity})`;
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+            }
+
+            function initParticles() {
+                particlesArray = [];
+                const numberOfParticles = 60;
+                for (let i = 0; i < numberOfParticles; i++) {
+                    particlesArray.push(new Particle());
+                }
+            }
+
+            function animateParticles() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                for (let i = 0; i < particlesArray.length; i++) {
+                    particlesArray[i].update();
+                    particlesArray[i].draw();
+                }
+                requestAnimationFrame(animateParticles);
+            }
+
+            initParticles();
+            animateParticles();
+        }
     </script>
 </body>
 
